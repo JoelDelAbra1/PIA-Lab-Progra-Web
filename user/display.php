@@ -1,33 +1,43 @@
 <?php
-
+// Se incluye la conexion a la DB
 include("../conexion/conexion.php");
 
+// Se guardan las columnas en un array para ser usadas despues
 $columns = ['id_usr', 'nom_usr', 'email_usr', 'tel_usr'];
 
+// Se guarda el nombre de la tabla
 $entidad = "users";
 
+// Se guarda el id
 $id = 'id_usr';
 
+//
 $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_POST['searchSend']) : null;
 
-
+// Varaiable que nos ayudara a la busqueda
 $where = "";
 
+// Se comprueba si se esta realizando una bisqueda
 if ($search != null) {
+
+    //Si es verdad se empieza a crear una consulta con los valores
     $where = "WHERE (";
 
+    // Se cuentan las columas que se tiene
     $cont = count($columns);
 
+    // Ciclo for que ira agregando la consulta para la busqueda
     for ($i = 0; $i < $cont; $i++) {
         $where .= $columns[$i] . " LIKE '%" . $search . "%' OR ";
     }
 
+    // Se termina la consulta y se quita el OR
     $where = substr_replace($where, "", -3);
     $where .= ")";
 }
 
 
-//Limite 
+//
 $limit = isset($_POST['num_regisSend']) ? mysqli_real_escape_string($conexion, $_POST['num_regisSend']) : 1;
 
 
@@ -54,7 +64,8 @@ if (isset($_POST['displaySend'])) {
     <div class="container">
     <div class="row">
       <div class="col-12">
-        <table class="table text-center justify-content-center">
+      <div class="table-responsive">
+        <table class="table table-lg text-center justify-content-center">
           <thead>
             <tr>
               <th>ID</th>
@@ -62,8 +73,7 @@ if (isset($_POST['displaySend'])) {
               <th>Email</th>
               <th>Teléfono</th>
               <th>Acciones</th>
-            </tr>
-          </thead>    
+            </tr>  
     ';
 
 
@@ -96,8 +106,9 @@ if (isset($_POST['displaySend'])) {
 
     // mostrar resultados
 
-
-    while ($row = mysqli_fetch_assoc($result)) {
+    if ($num_rows > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+    
         $id_usr = $row['id_usr']; //este ultiomo es el de la DB
         $nom_usr = $row['nom_usr'];
         $email_usr = $row['email_usr'];
@@ -106,14 +117,14 @@ if (isset($_POST['displaySend'])) {
         $tabla .= '
         <tbody>
                         <tr>
-                            <td>' . $id_usr . '</td>
+                            <td class="id_usr">' . $id_usr . '</td>
                             <td>' . $nom_usr . '</td>
                             <td>' . $email_usr . '</td>
                             <td>' . $tel_usr . '</td>
                             <td>
-
-<button class="btn btn-sm btn-warning" onclick="getUsr(' . $id_usr . ')"><i class="fas fa-pen"></i></button>
-<button class="btn btn-sm btn-danger" onclick="confDeleteUsr(' . $id_usr . ')"><i class="fas fa-eraser"></i></button>
+<button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
+<button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
+<button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
 
                             </td>
                         </tr>
@@ -123,6 +134,16 @@ if (isset($_POST['displaySend'])) {
                     
         ';
     }
+}
+else {
+    $tabla .= '
+        <tbody>
+            <tr>
+                <td colspan="5">No se encontraron resultados</td>
+            </tr>
+        </tbody>
+    ';
+}
 
     $output = [];
     $output['totalRegis'] = $totalRegis;
@@ -166,7 +187,7 @@ if (isset($_POST['displaySend'])) {
 
     $num_fin = $num_inicio + 9;
 
-
+    $totalPags = ceil($output['totalRegis'] / $limit); //por si no se tienen registros
 
 
     if ($num_fin > $totalPags) {
@@ -176,7 +197,7 @@ if (isset($_POST['displaySend'])) {
 
 
 
-    for ($i = $num_inicio; $i < $num_fin; $i++) {
+    for ($i = $num_inicio; $i <= $num_fin; $i++) {
 
         if ($page == $i) {
             $tabla .= '    <li class="page-item"><a class="page-link active" href="#">' . $i . '</a></li>';
