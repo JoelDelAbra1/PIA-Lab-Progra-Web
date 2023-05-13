@@ -144,35 +144,16 @@ $("#nuevo").on("click",function () {
 
 
 function addUser() {
-    var tipoAdd = $('#tipo').val();
-    var nombreAdd = $('#nombre').val();
-    var apellidoAdd = $('#apellido').val();
-    var coloniaAdd = $('#colonia').val();
-    var calleAdd = $('#calle').val();
-    var telefonoAdd = $('#telefono').val();
-    var nacimientoAdd = $('#nacimiento').val();
-    var generoAdd = $('#genero').val();
-    var emailAdd = $('#email').val();
-    var contraAdd = $('#contra').val();
-
-
+    var numAdd = $('#num').val();
+    var ubiAdd = $('#ubi').val();
 
 
     $.ajax({
         url: "insert.php",
         type: 'POST',
         data: {
-            tipoSend: tipoAdd,
-            nombreSend: nombreAdd,
-            apellidoSend: apellidoAdd,
-            coloniaSend: coloniaAdd,
-            calleSend: calleAdd,
-            telefonoSend: telefonoAdd,
-            nacimientoSend: nacimientoAdd,
-            generoSend: generoAdd,
-            emailSend: emailAdd,
-            contraSend: contraAdd
-
+            numSend: numAdd,
+            ubiSend: ubiAdd,
         },
 
         success: function (data, status) {
@@ -231,18 +212,8 @@ function getUsr(id) {
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
         var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
-        $('#updatetipo').val(userid.id_tipo);
-        $('#updatenombre').val(userid.nom_usr);
-        $('#updateapellido').val(userid.ape_usr);
-        $('#updatecolonia').val(userid.colonia_usr);
-        $('#updatecalle').val(userid.calle_usr);
-        $('#updatetelefono').val(userid.tel_usr);
-        $('#updatenacimiento').val(userid.nac_usr);
-        $('#updategenero').val(userid.gen_usr);
-        $('#updateemail').val(userid.email_usr);
-        $('#updatecontra').val(userid.pass_usr);
-
-
+        $('#updatenum').val(userid.num_cons);
+        $('#updateubi').val(userid.ubi_cons);
     }); //obtener data
     $('#updateModal').modal('show');
 }
@@ -252,16 +223,9 @@ function Updatedetails() {
 
     // Se recuperan los valores y se asignan a variables de js
 
-    var updatetipo = $('#updatetipo').val();
-    var updatenombre = $('#updatenombre').val();
-    var updateapellido = $('#updateapellido').val();
-    var updatecolonia = $('#updatecolonia').val();
-    var updatecalle = $('#updatecalle').val();
-    var updatetelefono = $('#updatetelefono').val();
-    var updatenacimiento = $('#updatenacimiento').val();
-    var updategenero = $('#updategenero').val();
-    var updateemail = $('#updateemail').val();
-    var updatecontra = $('#updatecontra').val();
+    var updatenum = $('#updatenum').val();
+    var updateubi = $('#updateubi').val();
+
     var hiddenid = $('#hiddenid').val();
 
 
@@ -269,16 +233,8 @@ function Updatedetails() {
 
     $.post("update.php", {
         hiddenid: hiddenid,
-        updatetipo: updatetipo,
-        updatenombre: updatenombre,
-        updateapellido: updateapellido,
-        updatecolonia: updatecolonia,
-        updatecalle: updatecalle,
-        updatetelefono: updatetelefono,
-        updatenacimiento: updatenacimiento,
-        updategenero: updategenero,
-        updateemail: updateemail,
-        updatecontra: updatecontra
+        updatenum: updatenum,
+        updateubi: updateubi,
     },
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {

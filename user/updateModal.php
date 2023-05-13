@@ -105,7 +105,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-dark" >Actualizar</button>
+                            <button type="submit"  id="actualizar" class="btn btn-dark" >Actualizar</button>
                             <input type="hidden" id="hiddenid">
                         </div>
                              </form>

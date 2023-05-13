@@ -19,7 +19,7 @@ Usuarios
 
       <!-- Boton de nuevo registro-->
       <div class="col-4">
-        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#nuevoModal">
+        <button type="button" id="nuevo" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#nuevoModal">
           Nuevo
         </button>
       </div>

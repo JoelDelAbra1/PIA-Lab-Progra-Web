@@ -56,8 +56,8 @@ require_once("ti.php");
 
                 if ($id == 1)
                     echo '
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="">Eliminar</a>
-    <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Shortcuts</a>
+    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
+    <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
     <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Overview</a>
     <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Events</a>
     <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Profile</a>
