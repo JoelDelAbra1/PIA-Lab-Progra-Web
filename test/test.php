@@ -3,7 +3,7 @@
 
 <!-- Se le da el valor al bloque de titulo -->
 <?php startblock('title') ?>
-Consultorios
+Pruebas
 <?php endblock() ?>
 <!-- Fin del bloque titulo -->
 
@@ -12,10 +12,8 @@ Consultorios
 
 <!-- Contenido de la pagina -->
 <div class="container-fluid ">
-    <h1 id="tituloprueb" class="mt-4 text-center">Consultorio</h1>
+    <h1 id="tituloprueb" class="mt-4 text-center">Pruebas</h1>
     <br>
-
-
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">
 
@@ -38,13 +36,14 @@ Consultorios
             <!-- Campo para selecionar cuantos reistros ver-->
             <div class="col-auto">
                 <select name="num_regis" id="num_regis" class="form-select">
-                    <option value="1">5</option>
+                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
             </div>
         </div>
     </div>
+
 
     <br>
 

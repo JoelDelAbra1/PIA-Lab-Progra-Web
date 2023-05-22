@@ -58,9 +58,9 @@ require_once("ti.php");
                     echo '
     <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
     <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Overview</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Events</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Profile</a>
+    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../doctor/doctor.php">Doctores</a>
+    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../test/test.php">Pruebas</a>
+    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>
     <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Status</a> ';
   
                 ?>
@@ -85,7 +85,7 @@ require_once("ti.php");
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#!">Action</a>
+                                    <a class="dropdown-item" href="#!">Pruebas de laboratori</a>
                                     <a class="dropdown-item" href="#!">Another action</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#!">Something else here</a>

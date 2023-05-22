@@ -3,13 +3,13 @@
 include("../conexion/conexion.php");
 
 // Se guardan las columnas en un array para ser usadas despues
-$columns = ['id_doc','nombre_doc', 'nom_esp', 'num_cons'];
+$columns = ['id_test','nom_test'];
 
 // Se guarda el nombre de la tabla
-$entidad = "v_doctor";
+$entidad = "test";
 
 // Se guarda el id
-$id = 'id_doc';
+$id = 'id_test';
 
 //
 $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_POST['searchSend']) : null;
@@ -69,9 +69,7 @@ if (isset($_POST['displaySend'])) {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Doctor</th>
-              <th>Especialidad</th>
-              <th>Consultorio</th>
+              <th>Prueba</th>
               <th>Acciones</th>
             </tr>  
     ';
@@ -109,19 +107,14 @@ if (isset($_POST['displaySend'])) {
     if ($num_rows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
 
-            $id_doc= $row['id_doc']; //este ultiomo es el de la DB
-            $nombre_doc = $row['nombre_doc'];
-            $nom_esp = $row['nom_esp'];
-            $num_cons = $row['num_cons'];
-
-
+            $id_test= $row['id_test']; //este ultiomo es el de la DB
+            $nom_test = $row['nom_test'];
         $tabla .= '
         <tbody>
                         <tr>
-                            <td class="id_usr">' . $id_doc . '</td>
-                            <td>' . $nombre_doc . '</td>
-                            <td>' . $nom_esp . '</td>
-                            <td>' . $num_cons . '</td>
+                            <td class="id_usr">' . $id_test . '</td>
+                            <td>' . $nom_test . '</td>
+                            
                          
                             <td>
 <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
@@ -140,7 +133,7 @@ else {
     $tabla .= '
         <tbody>
             <tr>
-                <td colspan="5">No se encontraron resultados</td>
+                <td colspan="4">No se encontraron resultados</td>
             </tr>
         </tbody>
     ';

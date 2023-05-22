@@ -141,22 +141,19 @@ $("#nuevo").on("click",function () {
     $('#contra').val('');
 });
 
-function addUser() {
-    var docAdd = $('#doc').val();
-    var consAdd = $('#cons').val();
-    var especialidadAdd = $('#especialidad').val();
-    var trayectoriaAdd = $('#trayectoria').val();
 
+
+function addUser() {
+    var numAdd = $('#num').val();
+    var ubiAdd = $('#ubi').val();
 
 
     $.ajax({
         url: "insert.php",
         type: 'POST',
         data: {
-            docSend: docAdd,
-            consSend: consAdd,
-            especialidadSend: especialidadAdd,
-            trayectoriaSend: trayectoriaAdd,
+            numSend: numAdd,
+            ubiSend: ubiAdd,
         },
 
         success: function (data, status) {
@@ -215,11 +212,8 @@ function getUsr(id) {
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
         var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
-
-            $('#updatedoc').val(userid.id_doc);
-            $('#updatecons').val(userid.id_cons);
-            $('#updateespecialidad').val(userid.id_esp);
-            $('#updatetrayectoria').val(userid.traye_doc);
+        $('#updatenum').val(userid.num_cons);
+        $('#updateubi').val(userid.ubi_cons);
     }); //obtener data
     $('#updateModal').modal('show');
 }
@@ -229,9 +223,9 @@ function Updatedetails() {
 
     // Se recuperan los valores y se asignan a variables de js
 
-    var updatecons = $('#updatecons').val();
-    var updateespecialidad = $('#updateespecialidad').val();
-    var updatetrayectoria = $('#updatetrayectoria').val();
+    var updatenum = $('#updatenum').val();
+    var updateubi = $('#updateubi').val();
+
     var hiddenid = $('#hiddenid').val();
 
 
@@ -239,10 +233,8 @@ function Updatedetails() {
 
     $.post("update.php", {
         hiddenid: hiddenid,
-            updatecons: updatecons,
-            updateespecialidad: updateespecialidad,
-            updatetrayectoria: updatetrayectoria,
-
+        updatenum: updatenum,
+        updateubi: updateubi,
     },
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {

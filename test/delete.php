@@ -6,10 +6,10 @@ include '../conexion/conexion.php';
 // Se verefica que se tenga el valor de ID
 if(isset($_POST['idSend'])){
     // Se guarda el valor obtenido
-    $id_doc=$_POST['idSend'];
+    $id_cons=$_POST['idSend'];
 
     // Consulta SQL
-    $sql="DELETE FROM doctor where id_doc = $id_doc";
+    $sql="DELETE FROM consultorio where id_cons = $id_cons";
 
     //Se ejecuta la consulta
     $result=mysqli_query($conexion,$sql);

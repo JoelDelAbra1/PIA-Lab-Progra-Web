@@ -1,9 +1,10 @@
 <!-- Se incluye la plantilla base -->
 <?php include('../templates/prub.php'); ?>
 
+
 <!-- Se le da el valor al bloque de titulo -->
 <?php startblock('title') ?>
-Consultorios
+Doctor
 <?php endblock() ?>
 <!-- Fin del bloque titulo -->
 
@@ -12,8 +13,10 @@ Consultorios
 
 <!-- Contenido de la pagina -->
 <div class="container-fluid ">
-    <h1 id="tituloprueb" class="mt-4 text-center">Consultorio</h1>
+    <h1 id="tituloprueb" class="mt-4 text-center">Doctores</h1>
     <br>
+
+
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">
 
@@ -33,10 +36,12 @@ Consultorios
                 </div>
             </div>
 
+
+
             <!-- Campo para selecionar cuantos reistros ver-->
             <div class="col-auto">
                 <select name="num_regis" id="num_regis" class="form-select">
-                    <option value="1">5</option>
+                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
@@ -44,12 +49,10 @@ Consultorios
         </div>
     </div>
 
-
     <br>
 
     <!-- Div en donde estara la tabla -->
-    <div id="displayDataTable" class="bg-light justify-content-center">
-    </div>
+    <div id="displayDataTable" class="bg-light justify-content-center"></div>
 </div>
 </div>
 
@@ -71,5 +74,5 @@ Consultorios
 
 <script src="usr.js"></script>
 
-<!-- Fin del bloue js-->
+<!-- Fin del bloque js-->
 <?php endblock() ?>

@@ -5,7 +5,7 @@
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo 
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Prueba
                         </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -15,17 +15,10 @@
                     <div class="form-group mb-4">
                         <form id="add">
 
-                            <!-- numero de consultorio input -->
+                            <!-- nombre del test input -->
                             <div class="form-outline mb-4">
-                                <label for="num">Numero de consultorio</label>
-                                <input type="number" id="num" class="form-control border border-secondary" required />
-                            </div>
-
-                            <!-- Ubucacion Cons input -->
-                            <div class="form-outline mb-4">
-                                <label for="ubi">Ubicacion</label>
-                                <input id="ubi" type="text" class="form-control border border-secondary"
-                                    required />
+                                <label for="nom">Nombre</label>
+                                <input type="text" id="nom" class="form-control border border-secondary" required />
                             </div>
 
                         </div>
