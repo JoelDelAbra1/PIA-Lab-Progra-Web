@@ -36,7 +36,7 @@ Citas
             <!-- Campo para selecionar cuantos reistros ver-->
             <div class="col-auto">
                 <select name="num_regis" id="num_regis" class="form-select">
-                    <option value="1">5</option>
+                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>

@@ -3,13 +3,13 @@
 include("../conexion/conexion.php");
 
 // Se guardan las columnas en un array para ser usadas despues
-$columns = ['id_cons','num_cons', 'ubi_cons'];
+$columns = ['id_cita','paciente', 'doctor', 'fecha_cita', 'nom_estado'];
 
 // Se guarda el nombre de la tabla
-$entidad = "consultorio";
+$entidad = "v_cita";
 
 // Se guarda el id
-$id = 'id_cons';
+$id = 'id_cita';
 
 //
 $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_POST['searchSend']) : null;
@@ -69,9 +69,10 @@ if (isset($_POST['displaySend'])) {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Numero de consultorio</th>
-              <th>Ubicacion</th>
-              
+              <th>Paciente</th>
+              <th>Doctor</th>
+              <th>Fecha</th>
+              <th>Estado</th>
               <th>Acciones</th>
             </tr>  
     ';
@@ -108,30 +109,49 @@ if (isset($_POST['displaySend'])) {
 
     if ($num_rows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $id_cita= $row['id_cita']; //este ultiomo es el de la DB
+            $paciente = $row['paciente'];
+            $doctor = $row['doctor'];
+            $fecha_cita = $row['fecha_cita'];
+            $nom_estado = $row['nom_estado'];
 
-            $id_cons= $row['id_cons']; //este ultiomo es el de la DB
-            $num_cons = $row['num_cons'];
-            $ubi_cons = $row['ubi_cons'];
 
-
-        $tabla .= '
-        <tbody>
-                        <tr>
-                            <td class="id_usr">' . $id_cons . '</td>
-                            <td>' . $num_cons . '</td>
-                            <td>' . $ubi_cons . '</td>
-                         
-                            <td>
-<button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
-<button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
-
-                            </td>
-                        </tr>
-
-                       
-
-                    
+            $tabla .= '
+            <tbody>
+                <tr>
+                    <td class="id_usr">' . $id_cita . '</td>
+                    <td>' . $paciente . '</td>
+                    <td>' . $doctor . '</td>
+                    <td>' . $paciente . '</td>
+                    <td>' . $fecha_cita . '</td>
+                    <td>';
+        
+        // Dependiendo del valor de $nom_estado, asigna la clase de la badge correspondiente
+        $badge_class = '';
+        switch ($nom_estado) {
+            case 'Pendiente':
+                $badge_class = 'badge badge-success';
+                break;
+            case 'Confirmada':
+                $badge_class = 'badge badge-warning';
+                break;
+            case 'Cancelada':
+                $badge_class = 'badge badge-danger';
+                break;
+            default:
+                $badge_class = 'badge badge-secondary';
+                break;
+        }
+        
+        $tabla .= '<span class="' . $badge_class . '">' . $nom_estado . '</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-eraser"></i></button>
+                    </td>
+                </tr>
+            </tbody>
         ';
+        
     }
 }
 else {

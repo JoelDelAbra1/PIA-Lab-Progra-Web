@@ -1,70 +1,118 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ejemplo de Modal con Select y Búsqueda usando Select2 y MDB Bootstrap</title>
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet">
-    <!-- Select2 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container">
-    <h1>Ejemplo de Modal con Select y Búsqueda usando Select2 y MDB Bootstrap</h1>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-        Launch demo modal
-    </button>
-</div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form>
+<body>
+
+    <!-- Botón para abrir el modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        Abrir Modal
+    </button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
-                    <select class="select" data-mdb-container="#exampleModal" data-mdb-filter="true">
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="4">Four</option>
-                        <option value="5">Five</option>
-                        <option value="6">Six</option>
-                        <option value="7">Seven</option>
-                        <option value="8">Eight</option>
-                        <option value="9">Nine</option>
-                        <option value="10">Ten</option>
-                    </select>
+                    <div class="form-outline mb-4">
+                        <label for="exampleDataList" class="form-label">Datalist example</label>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                        <datalist id="datalistOptions">
+                            <option value="Option 1"></option>
+                            <option value="Option 2"></option>
+                            <option value="Option 3"></option>
+                        </datalist>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label for="newDataList" class="form-label">New Datalist</label>
+                        <input class="form-control" list="newDatalistOptions" id="newDataList" placeholder="Type to search...">
+                        <datalist id="newDatalistOptions">
+                            <option value="New Option 1"></option>
+                            <option value="New Option 2"></option>
+                            <option value="New Option 3"></option>
+                        </datalist>
+                    </div>
+                    <button id="addNewFields" class="btn btn-primary">Agregar Nuevo</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/@popperjs/core/2.11.6/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $(".select").select2({
-            theme: 'mdb',
-            width: '100%'
+    <!-- Enlace a la librería de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Enlace a los scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#addNewFields').click(function() {
+                var newDatalist = $('<div class="form-outline mb-4"><label class="form-label">New Datalist</label><input class="form-control" list="newDatalistOptions" placeholder="Type to search..."><datalist id="newDatalistOptions"><option value="New Option 1"></option><option value="New Option 2"></option><option value="New Option 3"></option></datalist></div>');
+                var newInput = $('<div class="form-outline mb-4"><label class="form-label">New Input</label><input class="form-control" placeholder="New Input"></div>');
+                
+                $('#myModal .modal-body').append(newDatalist);
+                $('#myModal .modal-body').append(newInput);
+            });
         });
-    });
-</script>
+    </script>
+</body>
+</html>
+
+
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Intervalo de tiempo</title>
+</head>
+<body>
+  <form>
+    <label for="hora">Hora:</label>
+    <select id="hora" name="hora"></select>
+    <br>
+    <input type="submit" value="Enviar">
+  </form>
+
+  <script>
+    // Obtener el elemento select
+    var selectHora = document.getElementById("hora");
+
+    // Definir el horario laboral
+    var horaInicio = 9; // Hora de inicio (formato de 24 horas)
+    var horaFin = 17; // Hora de fin (formato de 24 horas)
+    var intervalo = 45; // Intervalo de tiempo (en minutos)
+
+    // Convertir las horas a minutos
+    var inicioEnMinutos = horaInicio * 60;
+    var finEnMinutos = horaFin * 60;
+
+    for (var i = inicioEnMinutos; i < finEnMinutos; i += intervalo) {
+      var horas = Math.floor(i / 60); // Obtener las horas
+      var minutos = i % 60; // Obtener los minutos
+
+      // Formatear las horas y minutos
+      var horaFormateada = ("0" + horas).slice(-2); // Añadir un cero inicial si es necesario
+      var minutosFormateados = ("0" + minutos).slice(-2); // Añadir un cero inicial si es necesario
+
+      // Crear la opción y agregarla al select
+      var opcion = document.createElement("option");
+      opcion.value = horaFormateada + ":" + minutosFormateados;
+      opcion.textContent = horaFormateada + ":" + minutosFormateados;
+      selectHora.appendChild(opcion);
+    }
+  </script>
 </body>
 </html>

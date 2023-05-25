@@ -22,7 +22,14 @@ $("#num_regis").on("change", function () {
 // Se agrega un listener con Jquerry al form para crear registros, que cuando se envie se llama a la funcion addUsr
 $("#add").on("submit", function () {
     addUser();
+
+    
+});$("#addCita").on("submit", function () {
+    addCita();
 });
+
+
+
 
 // Se agrega un listener con Jquerry al form para actualizar registros, que cuando se envie se llame a la funcion Updatedetails
 $("#update").on("submit", function () {
@@ -62,6 +69,12 @@ function displayData(page) {
         }
     });
 }
+
+$("#displayDataTable").on("click", ".btn-primary", function () {
+    getCita($(this).closest("tr").find(".id_usr").text());
+    $("#titleCita").text("Agregar Cita Usuario #" + $(this).closest("tr").find(".id_usr").text())
+    $("#citaModal").modal("show");
+});
 
 $("#displayDataTable").on("click", ".btn-danger", function () {
     confDeleteUsr($(this).closest("tr").find(".id_usr").text());
@@ -216,6 +229,62 @@ function deleteUsr(id) {
     });
 }
 
+function getCita(id) {
+
+    // Se le asigna el valor de id pra
+    $('#hiddenidCita').val(id)
+
+    // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
+    $.post("update.php", {
+        updateid: id
+    },
+        //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
+        function (data, status) {
+        var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
+        $('#nombreCita').val(userid.nom_usr);
+        $('#apellidoCita').val(userid.ape_usr);
+        $('#emailCita').val(userid.email_usr);
+
+
+    }); //obtener data
+}
+
+function addCita() {
+    var usrAdd = $('#hiddenidCita').val();
+   var fecha = $('#fecha').val();
+   var hora = $('#hora').val();
+
+   var fechaHoraAdd = fecha + ' ' + hora;
+    var docAdd = $('#doc').val();
+   
+
+
+
+    $.ajax({
+        url: "insertCita.php",
+        type: 'POST',
+        data: {
+            usrSend: usrAdd,
+            fechaHoraSend: fechaHoraAdd,
+            docSend: docAdd
+
+        },
+
+        success: function (data, status) {
+            //Display data
+            console.log(status);
+            $('#nuevoModal').modal('hide');
+            $('#eliminarModal').modal('show');
+            $('#cuerpo').text(status);
+            $('#confDel').remove();
+            displayData();
+        },
+        error: function (data, status){
+
+        }
+
+    })
+}
 
 
 // Funcion para obtener los datos de un usuario en espesifico para despues modificar
@@ -286,3 +355,30 @@ function Updatedetails() {
         displayData(); // Se vuelve a mostrar los datos ya actualizados
     });
 }
+
+ // Obtener el elemento select
+ var selectHora = document.getElementById("hora");
+
+ // Definir el horario laboral
+ var horaInicio = 9; // Hora de inicio (formato de 24 horas)
+ var horaFin = 17; // Hora de fin (formato de 24 horas)
+ var intervalo = 45; // Intervalo de tiempo (en minutos)
+
+ // Convertir las horas a minutos
+ var inicioEnMinutos = horaInicio * 60;
+ var finEnMinutos = horaFin * 60;
+
+ for (var i = inicioEnMinutos; i < finEnMinutos; i += intervalo) {
+   var horas = Math.floor(i / 60); // Obtener las horas
+   var minutos = i % 60; // Obtener los minutos
+
+   // Formatear las horas y minutos
+   var horaFormateada = ("0" + horas).slice(-2); // Añadir un cero inicial si es necesario
+   var minutosFormateados = ("0" + minutos).slice(-2); // Añadir un cero inicial si es necesario
+
+   // Crear la opción y agregarla al select
+   var opcion = document.createElement("option");
+   opcion.value = horaFormateada + ":" + minutosFormateados;
+   opcion.textContent = horaFormateada + ":" + minutosFormateados;
+   selectHora.appendChild(opcion);
+ }

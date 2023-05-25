@@ -51,6 +51,7 @@ Usuarios
 </div>
 </div>
 
+<?php include('citaModal.php'); ?>
 <!-- Modal Nuevo-->
 <?php include('nuevoModal.php'); ?>
 
@@ -59,6 +60,8 @@ Usuarios
 
 <!-- Modal Aviso ELiminar -->
 <?php include('confDel.php'); ?>
+
+
 
 <!-- Fin del bloque contenido-->
 <?php endblock() ?>

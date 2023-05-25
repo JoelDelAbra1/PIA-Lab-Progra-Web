@@ -122,6 +122,7 @@ if (isset($_POST['displaySend'])) {
                             <td>' . $email_usr . '</td>
                             <td>' . $tel_usr . '</td>
                             <td>
+<button class="btn btn-sm btn-primary"><i class="fas fa-calendar-plus"></i></button>
 <button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
 <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
 <button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
