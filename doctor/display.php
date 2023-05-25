@@ -124,6 +124,7 @@ if (isset($_POST['displaySend'])) {
                             <td>' . $num_cons . '</td>
                          
                             <td>
+<button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
 <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
 <button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
 

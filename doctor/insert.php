@@ -10,8 +10,8 @@ extract($_POST);
 
 
     // Se crea la consulta SQL y se guarda
-    $sql = "INSERT INTO doctor (id_cons, id_esp, traye_doc) 
-    VALUES ( '$especialidadSend', '$consSend', '$trayectoriaSend')";
+    $sql = "INSERT INTO doctor (id_doc, id_cons, id_esp, traye_doc) 
+    VALUES ( '$docSend' ,'$consSend', '$especialidadSend', '$trayectoriaSend')";
 
     //Se ejecuta la consulta
     $result=mysqli_query($conexion, $sql);

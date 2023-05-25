@@ -74,55 +74,28 @@ $("#displayDataTable").on("click", ".btn-warning", function () {
 
     $("#actualizar").show();
 
-    $("#updategenero").prop("disabled", false)
-    $("#updatetipo").prop("disabled", false);
+  // Campos de entrada a los que se les aplicará el modo de solo lectura
+  $("#updatedoc").prop("disabled", false);
+  $("#updatecons").prop("disabled", false);
+  $("#updateespecialidad").prop("disabled", false);
+  $("#updatetrayectoria").removeAttr("readonly");
 
-    // Campos de entrada a los que se les aplicará el modo de solo lectura
-    var campos = [
-        "#updatenombre",
-        "#updateapellido",
-        "#updatecolonia",
-        "#updatecalle",
-        "#updatetelefono",
-        "#updatenacimiento",
-        "#updateemail",
-        "#updatecontra"
-    ];
-
-    // Agregar el atributo "readonly" a los campos de entrada
-    campos.forEach(function(campo) {
-        $(campo).removeAttr("readonly");
-
-    });
+  
+    
 });
+
+//Mostrar los campos para ver
 
 $("#displayDataTable").on("click", ".btn-success", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Ver usuario " + $(this).closest("tr").find(".id_usr").text());
+    $("#titleUpdt").text("Ver doctor " + $(this).closest("tr").find(".id_usr").text());
 
     $("#actualizar").hide();
-
-    $("#updategenero").prop("disabled", true)
-    $("#updatetipo").prop("disabled", true);
-
-    // Campos de entrada a los que se les aplicará el modo de solo lectura
-    var campos = [
-        "#updatenombre",
-        "#updateapellido",
-        "#updatecolonia",
-        "#updatecalle",
-        "#updatetelefono",
-        "#updatenacimiento",
-        "#updateemail",
-        "#updatecontra"
-    ];
-
-
-    // Agregar el atributo "readonly" a los campos de entrada
-    campos.forEach(function(campo) {
-        $(campo).attr("readonly", "readonly");
-
-});
+ // Campos de entrada a los que se les aplicará el modo de solo lectura
+    $("#updatedoc").prop("disabled", true);
+    $("#updatecons").prop("disabled", true);
+    $("#updateespecialidad").prop("disabled", true);
+    $("#updatetrayectoria").attr("readonly", "readonly");
 });
 
 

@@ -4,7 +4,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="titleUpdt">Editar usuario </h1>
+                            <h1 class="modal-title fs-5" id="titleUpdt">Editar Consultorio</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                         </div>
@@ -15,13 +15,13 @@
 
                                  <!-- numero de consultorio input -->
                                  <div class="form-outline mb-4">
-                                     <label for="updatenum">Correo electronico(s)</label>
+                                     <label for="updatenum">Número de Consultorio</label>
                                      <input type="number" id="updatenum" class="form-control border border-secondary" required />
                                  </div>
 
-                                 <!-- Ubucacion Cons input -->
+                                 <!-- Ubicación Cons input -->
                                  <div class="form-outline mb-4">
-                                     <label for="updateubi">Contraseña</label>
+                                     <label for="updateubi">Ubicación</label>
                                      <input id="updateubi" type="text" class="form-control border border-secondary"
                                             required />
                                  </div>

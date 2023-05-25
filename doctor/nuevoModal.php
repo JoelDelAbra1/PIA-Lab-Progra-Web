@@ -37,7 +37,7 @@
 
                             <!-- Selecionar consultorio-->
                             <label for="cons">Consultorio</label>
-                            <select class="form-select border border-secondary form-control form-outline" id="conscons" required>
+                            <select class="form-select border border-secondary form-control form-outline" id="cons" required>
                             <!-- Se consiguen los consultorio que existen-->
                             <?php
                             include("../conexion/conexion.php");

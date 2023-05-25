@@ -69,7 +69,7 @@ Consultorios
 <!-- Inicia el bloque js-->
 <?php startblock('js') ?>
 
-<script src="usr.js"></script>
+<script src="consultorio.js"></script>
 
 <!-- Fin del bloue js-->
 <?php endblock() ?>

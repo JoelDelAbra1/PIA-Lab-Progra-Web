@@ -72,7 +72,7 @@ Doctor
 <!-- Inicia el bloque js-->
 <?php startblock('js') ?>
 
-<script src="usr.js"></script>
+<script src="doctor.js"></script>
 
 <!-- Fin del bloque js-->
 <?php endblock() ?>

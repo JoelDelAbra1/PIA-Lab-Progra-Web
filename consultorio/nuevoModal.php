@@ -23,7 +23,7 @@
 
                             <!-- Ubucacion Cons input -->
                             <div class="form-outline mb-4">
-                                <label for="ubi">Ubicacion</label>
+                                <label for="ubi">Ubicación</label>
                                 <input id="ubi" type="text" class="form-control border border-secondary"
                                     required />
                             </div>

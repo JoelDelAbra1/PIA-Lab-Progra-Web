@@ -70,7 +70,7 @@ $("#displayDataTable").on("click", ".btn-danger", function () {
 
 $("#displayDataTable").on("click", ".btn-warning", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Editar usuario " + $(this).closest("tr").find(".id_usr").text())
+    $("#titleUpdt").text("Editar Consultorio #" + $(this).closest("tr").find(".id_usr").text())
 
     $("#actualizar").show();
 
