@@ -87,32 +87,7 @@
   </form>
 
   <script>
-    // Obtener el elemento select
-    var selectHora = document.getElementById("hora");
-
-    // Definir el horario laboral
-    var horaInicio = 9; // Hora de inicio (formato de 24 horas)
-    var horaFin = 17; // Hora de fin (formato de 24 horas)
-    var intervalo = 45; // Intervalo de tiempo (en minutos)
-
-    // Convertir las horas a minutos
-    var inicioEnMinutos = horaInicio * 60;
-    var finEnMinutos = horaFin * 60;
-
-    for (var i = inicioEnMinutos; i < finEnMinutos; i += intervalo) {
-      var horas = Math.floor(i / 60); // Obtener las horas
-      var minutos = i % 60; // Obtener los minutos
-
-      // Formatear las horas y minutos
-      var horaFormateada = ("0" + horas).slice(-2); // Añadir un cero inicial si es necesario
-      var minutosFormateados = ("0" + minutos).slice(-2); // Añadir un cero inicial si es necesario
-
-      // Crear la opción y agregarla al select
-      var opcion = document.createElement("option");
-      opcion.value = horaFormateada + ":" + minutosFormateados;
-      opcion.textContent = horaFormateada + ":" + minutosFormateados;
-      selectHora.appendChild(opcion);
-    }
+   
   </script>
 </body>
 </html>

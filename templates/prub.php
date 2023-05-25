@@ -43,30 +43,38 @@ require_once("ti.php");
 </head>
 
 <body>
-    <div class="d-flex bg-light " id="wrapper">
-        <!-- Sidebar-->
-        <div class="border-end  text-center" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom azul">Centro Médico JOVA</div>
-            <div class="list-group custom-sidebar">
+<div class="d-flex bg-light" id="wrapper">
+    <!-- Sidebar -->
+    <div class="border-end text-center" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom azul">Centro Médico JOVA</div>
+        <div class="list-group custom-sidebar d-flex flex-column">
+            <?php
+                session_start();
+                $tipo = $_SESSION["tipo"];
 
-                <?php
-                $lol = 2;
-                $id = 1;
-
-
-                if ($id == 1)
+                if ($tipo == 1) {
                     echo '
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
-    <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../doctor/doctor.php">Doctores</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../test/test.php">Pruebas</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>
-    <a class="list-group-item list-group-item-action p-4 fw-bold" href="#!">Status</a> ';
-  
-                ?>
-
-            </div>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold flex-grow-1" href="#!">Status</a>';
+                } else if($tipo == 2) {
+                    echo '
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold flex-grow-1" href="#!">Status</a>';
+                }
+                
+                echo '
+                <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../doctor/doctor.php">Doctores</a>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../test/test.php">Pruebas</a>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>
+                <a class="list-group-item list-group-item-action p-4 fw-bold" href="../cerrarSesion.php" >Cerar Sesion</a>';
+            ?>
         </div>
+    </div>
+
+
+
+
         <!-- Page content wrapper-->
         <div id="page-content-wrapper" class="bg-ligtht ">
             <!-- Top navigation-->
@@ -82,11 +90,18 @@ require_once("ti.php");
                             <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+
+                            <?php
+
+$nombre = $_SESSION["nombre"];
+
+                            echo '<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. $nombre .'</a>';
+                            ?>
+                                
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#!">Pruebas de laboratori</a>
-                                    <a class="dropdown-item" href="#!">Another action</a>
+                                    <a class="dropdown-item" href="#!">Mis datos</a>
+                                    <a class="dropdown-item" href="../cerrarSesion.php">Cerrar Sesion</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#!">Something else here</a>
                                 </div>

@@ -76,6 +76,7 @@ $("#displayDataTable").on("click", ".btn-primary", function () {
     $("#citaModal").modal("show");
 });
 
+
 $("#displayDataTable").on("click", ".btn-danger", function () {
     confDeleteUsr($(this).closest("tr").find(".id_usr").text());
     $("#cuerpo").text( "Eliminaras al usuario " + $(this).closest("tr").find(".id_usr").text());

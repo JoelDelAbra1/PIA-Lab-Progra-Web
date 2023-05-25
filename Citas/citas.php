@@ -17,13 +17,13 @@ Citas
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">
 
-            <!-- Boton de nuevo registro-->
+            <!-- Boton de nuevo registro
             <div class="col-4">
                 <button type="button" id="nuevo" class="btn btn-dark" data-bs-toggle="modal"
                         data-bs-target="#nuevoModal">
                     Nuevo
                 </button>
-            </div>
+            </div>-->
 
             <!-- Campo de busqueda -->
             <div class="col-4">

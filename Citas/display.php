@@ -122,7 +122,7 @@ if (isset($_POST['displaySend'])) {
                     <td class="id_usr">' . $id_cita . '</td>
                     <td>' . $paciente . '</td>
                     <td>' . $doctor . '</td>
-                    <td>' . $paciente . '</td>
+                    
                     <td>' . $fecha_cita . '</td>
                     <td>';
         
