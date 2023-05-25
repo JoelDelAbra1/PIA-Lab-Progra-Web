@@ -3,7 +3,7 @@
 
 <!-- Se le da el valor al bloque de titulo -->
 <?php startblock('title') ?>
-Consultorios
+Citas
 <?php endblock() ?>
 <!-- Fin del bloque titulo -->
 
@@ -12,7 +12,7 @@ Consultorios
 
 <!-- Contenido de la pagina -->
 <div class="container-fluid ">
-    <h1 id="tituloprueb" class="mt-4 text-center">Consultorio</h1>
+    <h1 id="tituloprueb" class="mt-4 text-center">Citas</h1>
     <br>
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">

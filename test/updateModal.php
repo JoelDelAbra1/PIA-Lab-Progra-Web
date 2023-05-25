@@ -13,17 +13,10 @@
                             <div  class="form-group mb-4">
                              <form id="update">
 
-                                 <!-- numero de consultorio input -->
+                                 <!-- Nombre input -->
                                  <div class="form-outline mb-4">
-                                     <label for="updatenum">Correo electronico(s)</label>
-                                     <input type="number" id="updatenum" class="form-control border border-secondary" required />
-                                 </div>
-
-                                 <!-- Ubucacion Cons input -->
-                                 <div class="form-outline mb-4">
-                                     <label for="updateubi">Contraseña</label>
-                                     <input id="updateubi" type="text" class="form-control border border-secondary"
-                                            required />
+                                     <label for="updatenom">Nombre de la prueba</label>
+                                     <input type="text" id="updatenom" class="form-control border border-secondary" required />
                                  </div>
 
                         </div>

@@ -8,12 +8,12 @@ extract($_POST);
 
 // Se comprueba que si se tengan los datos
 if (
-    isset($_POST['numSend']) && isset($_POST['ubiSend'])
+    isset($_POST['nomSend'])
 ) {
 
     // Se crea la consulta SQL y se guarda
-    $sql = "INSERT INTO consultorio(num_cons, ubi_cons) 
-    VALUES ('$numSend', '$ubiSend')";
+    $sql = "INSERT INTO test(nom_test) 
+    VALUES ('$nomSend')";
 
     //Se ejecuta la consulta
     $result=mysqli_query($conexion, $sql);

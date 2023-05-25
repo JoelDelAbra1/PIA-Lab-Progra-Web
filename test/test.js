@@ -70,7 +70,7 @@ $("#displayDataTable").on("click", ".btn-danger", function () {
 
 $("#displayDataTable").on("click", ".btn-warning", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Editar usuario " + $(this).closest("tr").find(".id_usr").text())
+    $("#titleUpdt").text("Editar prueba #" + $(this).closest("tr").find(".id_usr").text())
 
     $("#actualizar").show();
 
@@ -98,7 +98,7 @@ $("#displayDataTable").on("click", ".btn-warning", function () {
 
 $("#displayDataTable").on("click", ".btn-success", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Ver usuario " + $(this).closest("tr").find(".id_usr").text());
+    $("#titleUpdt").text("Ver prueba" + $(this).closest("tr").find(".id_usr").text());
 
     $("#actualizar").hide();
 
@@ -144,16 +144,14 @@ $("#nuevo").on("click",function () {
 
 
 function addUser() {
-    var numAdd = $('#num').val();
-    var ubiAdd = $('#ubi').val();
+    var nomAdd = $('#nom').val();
 
 
     $.ajax({
         url: "insert.php",
         type: 'POST',
         data: {
-            numSend: numAdd,
-            ubiSend: ubiAdd,
+            nomSend: nomAdd,
         },
 
         success: function (data, status) {
@@ -212,8 +210,7 @@ function getUsr(id) {
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
         var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
-        $('#updatenum').val(userid.num_cons);
-        $('#updateubi').val(userid.ubi_cons);
+        $('#updatenom').val(userid.nom_test);
     }); //obtener data
     $('#updateModal').modal('show');
 }
@@ -223,9 +220,7 @@ function Updatedetails() {
 
     // Se recuperan los valores y se asignan a variables de js
 
-    var updatenum = $('#updatenum').val();
-    var updateubi = $('#updateubi').val();
-
+    var updatenom = $('#updatenom').val();
     var hiddenid = $('#hiddenid').val();
 
 
@@ -233,8 +228,7 @@ function Updatedetails() {
 
     $.post("update.php", {
         hiddenid: hiddenid,
-        updatenum: updatenum,
-        updateubi: updateubi,
+        updatenom: updatenom,
     },
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {

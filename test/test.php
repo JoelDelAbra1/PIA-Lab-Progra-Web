@@ -69,7 +69,7 @@ Pruebas
 <!-- Inicia el bloque js-->
 <?php startblock('js') ?>
 
-<script src="usr.js"></script>
+<script src="test.js"></script>
 
 <!-- Fin del bloue js-->
 <?php endblock() ?>
