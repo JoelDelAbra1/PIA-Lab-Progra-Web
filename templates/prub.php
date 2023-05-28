@@ -16,6 +16,15 @@ require_once("ti.php");
     <?php startblock('title') ?>
                             <?php endblock() ?>
   </title>
+
+
+  <script src="dist/notiflix-report-aio-X.X.X.min.js"></script>
+<link rel="stylesheet" href="dist/notiflix-X.X.X.min.css" />
+<script src="dist/notiflix-X.X.X.min.js"></script>
+<script src="dist/notiflix-aio-X.X.X.min.js"></script>
+
+
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->

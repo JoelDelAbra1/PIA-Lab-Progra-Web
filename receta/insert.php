@@ -7,14 +7,16 @@ include '../conexion/conexion.php';
 extract($_POST);
 
 // Se comprueba que si se tengan los datos
-
+if (
+    isset($_POST['numSend']) && isset($_POST['ubiSend'])
+) {
 
     // Se crea la consulta SQL y se guarda
-    $sql = "INSERT INTO detallemere( ubi_cons) 
+    $sql = "INSERT INTO consultorio(num_cons, ubi_cons) 
     VALUES ('$numSend', '$ubiSend')";
 
     //Se ejecuta la consulta
     $result=mysqli_query($conexion, $sql);
-
+}
 
 ?>

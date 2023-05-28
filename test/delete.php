@@ -11,6 +11,7 @@ if(isset($_POST['idSend'])){
     // Consulta SQL
     $sql="DELETE FROM test where id_test = $id_test";
 
+    
     //Se ejecuta la consulta
     $result=mysqli_query($conexion,$sql);
 }

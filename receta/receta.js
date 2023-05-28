@@ -25,10 +25,7 @@ $("#add").on("submit", function () {
 });
 
 // Se agrega un listener con Jquerry al form para actualizar registros, que cuando se envie se llame a la funcion Updatedetails
-$("#update").on("submit", function (event) {
-
-     // Prevenir el comportamiento predeterminado del formulario
-     event.preventDefault();
+$("#update").on("submit", function () {
     Updatedetails();
 });
 
@@ -68,16 +65,17 @@ function displayData(page) {
 
 $("#displayDataTable").on("click", ".btn-danger", function () {
     confDeleteUsr($(this).closest("tr").find(".id_usr").text());
-    $("#cuerpo").text( "Eliminaras al usuario " + $(this).closest("tr").find(".id_usr").text());
+    $("#cuerpo").text( "Eliminaras la cita: " + $(this).closest("tr").find(".id_usr").text());
 });
 
 $("#displayDataTable").on("click", ".btn-warning", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Editar cita " + $(this).closest("tr").find(".id_usr").text());
+    $("#titleUpdt").text("Editar Consultorio #" + $(this).closest("tr").find(".id_usr").text())
 
+    $("#actualizar").show();
 
-  //  $("#updategenero").prop("disabled", false)
-//    $("#updatetipo").prop("disabled", false);
+    $("#updategenero").prop("disabled", false)
+    $("#updatetipo").prop("disabled", false);
 
     // Campos de entrada a los que se les aplicará el modo de solo lectura
     var campos = [
@@ -181,7 +179,6 @@ function addUser() {
 function confDeleteUsr(id) {
     $('#eliminarModal').modal('show');
     $('#confDel').attr('onclick','deleteUsr('+ id +')');
-    
 }
 
 
@@ -214,25 +211,8 @@ function getUsr(id) {
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
         var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
-        $('#updateNombreCita').val(userid.paciente);
-        $('#updateTelCita').val(userid.telPa);
-        $('#nombreDocCita').val(userid.doctor);
-        $('#telDocCita').val(userid.telDoc);
-        $('#especialidadCita').val(userid.nom_esp);
-        $('#consCita').val(userid.num_cons);
-        $('#ubiCita').val(userid.ubi_cons);
-
-        var fechaCompleta= userid.fecha_cita;
-        var fecha = fechaCompleta.substring(0, 10);
-        var hora = fechaCompleta.substring(11, 16);
-
-        
-
-        $('#fechaCita').val(fecha);
-        $('#horaCita').val(hora);
-
-
-        //$('#telDocCita').val(userid.telDoc);
+        $('#updatenum').val(userid.num_cons);
+        $('#updateubi').val(userid.ubi_cons);
     }); //obtener data
     $('#updateModal').modal('show');
 }
@@ -242,20 +222,18 @@ function Updatedetails() {
 
     // Se recuperan los valores y se asignan a variables de js
 
-    var fecha = $('#fechaCita').val();
-    var hora = $('#horaCita').val();
- 
-    var fechaHoraAdd = fecha + ' ' + hora;
+    var updatenum = $('#updatenum').val();
+    var updateubi = $('#updateubi').val();
+
     var hiddenid = $('#hiddenid').val();
-    var estadoAdd = $('#estado').val();
 
 
     // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
 
     $.post("update.php", {
         hiddenid: hiddenid,
-        updateDate: fechaHoraAdd,
-        updateEstado: estadoAdd,
+        updatenum: updatenum,
+        updateubi: updateubi,
     },
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
@@ -263,31 +241,3 @@ function Updatedetails() {
         displayData(); // Se vuelve a mostrar los datos ya actualizados
     });
 }
-
-
- // Obtener el elemento select
- var selectHora = document.getElementById("horaCita");
-
- // Definir el horario laboral
- var horaInicio = 9; // Hora de inicio (formato de 24 horas)
- var horaFin = 17; // Hora de fin (formato de 24 horas)
- var intervalo = 45; // Intervalo de tiempo (en minutos)
-
- // Convertir las horas a minutos
- var inicioEnMinutos = horaInicio * 60;
- var finEnMinutos = horaFin * 60;
-
- for (var i = inicioEnMinutos; i < finEnMinutos; i += intervalo) {
-   var horas = Math.floor(i / 60); // Obtener las horas
-   var minutos = i % 60; // Obtener los minutos
-
-   // Formatear las horas y minutos
-   var horaFormateada = ("0" + horas).slice(-2); // Añadir un cero inicial si es necesario
-   var minutosFormateados = ("0" + minutos).slice(-2); // Añadir un cero inicial si es necesario
-
-   // Crear la opción y agregarla al select
-   var opcion = document.createElement("option");
-   opcion.value = horaFormateada + ":" + minutosFormateados;
-   opcion.textContent = horaFormateada + ":" + minutosFormateados;
-   selectHora.appendChild(opcion);
- }

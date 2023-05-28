@@ -1,0 +1,432 @@
+
+
+
+var actualPag = 1;
+displayData(actualPag)
+
+$(document).ready(function () {
+    displayData();
+    $('#search').val("");  //Se limpia el campo de busqueda
+
+
+
+     // Eliminar elemento
+     $(document).on('click', '.delete-btn', function() {
+        $(this).closest('div').remove(); // Eliminar el elemento del DOM
+    });
+
+    // Duplicar elemento
+    $('.duplicate-btn').click(function(event) {
+         // Evitar el comportamiento predeterminado de enviar el formulario
+
+        var originalElement = $(this).closest('.modal-body').find('#divOriginal');
+        var clonedElement = originalElement.clone().removeAttr('hidden'); // Clonar el elemento
+
+        // Limpiar los valores de los campos de entrada
+        clonedElement.find('input').val('');
+
+        // Insertar el elemento clonado después del elemento original
+        originalElement.after(clonedElement);
+
+        // Agregar botón de eliminar al elemento clonado
+        var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn">Eliminar</button>');
+        clonedElement.find('.form-outline').append(deleteButton);
+        return false;
+    });
+
+    $('.save-btn').click(function() {
+        var data = []; // Array para almacenar los datos
+
+        // Recorrer los elementos clonados para obtener los valores adicionales
+        $('.modal-body #divOriginal').nextAll('[id^="divOriginal"]').each(function() {
+            var frecuencia = $(this).find('.frecuencia').val();
+            var medicamentoInput = $(this).find('.exampleDataList');
+            var medicamentoValue = medicamentoInput.val(); // Obtener el valor seleccionado del datalist
+            var medicamentoDataValue = $(this).find('option[value="' + medicamentoValue + '"]').attr('data-medicamentodatavalue');
+
+            data.push({
+                frecuencia: frecuencia,
+                medicamentoDataValue: medicamentoDataValue
+            });
+        });
+
+        // Recorrer los elementos clonados para obtener los valores adicionales
+        $('.modal-body #divOriginalTest').nextAll('[id^="divOriginalTest"]').each(function() {
+            var testInput = $(this).find('.dataListTest');
+            var testValue = testInput.val(); // Obtener el valor seleccionado del datalist
+            var testDataValue = $(this).find('option[value="' + testValue + '"]').attr('data-testdatavalue');
+            data.push({
+                testDataValue: testDataValue
+            });
+        });
+
+        // Enviar los datos a un archivo PHP utilizando AJAX
+        $.ajax({
+            url: 'guardar.php', // Ruta al archivo PHP donde se procesarán los datos
+            type: 'POST',
+            data: { data: data },
+            success: function(response) {
+                // Manejar la respuesta del servidor
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores
+                console.error(error);
+            }
+        });
+    });
+
+    // Duplicar elemento
+    $('.duplicateTest-btn').click(function(event) {
+        event.preventDefault(); // Evitar el comportamiento predeterminado de enviar el formulario
+
+        var originalElement = $(this).closest('.modal-body').find('#divOriginalTest');
+        var clonedElement = originalElement.clone().removeAttr('hidden'); // Clonar el elemento
+
+        // Limpiar los valores de los campos de entrada
+        clonedElement.find('input').val('');
+
+        // Insertar el elemento clonado después del elemento original
+        originalElement.after(clonedElement);
+
+        // Agregar botón de eliminar al elemento clonado
+        var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn">Eliminar</button>');
+        clonedElement.find('.form-outline').append(deleteButton);
+        return false;
+    });
+});
+
+// Se agrega un listener con Jquerry al campo de busuqeda, que cuando se precione un tecla se llama a la funcion searh
+$("#search").on("keyup", function () {
+    search();
+});
+
+// Se agrega un listener con Jquerry a la lista de registros a ver, que cuando cambie llama a la funcion paginacion
+$("#num_regis").on("change", function () {
+    paginacion();
+});
+
+// Se agrega un listener con Jquerry al form para crear registros, que cuando se envie se llama a la funcion addUsr
+$("#add").on("submit", function () {
+    addUser();
+});
+
+$("#addReceta").on("submit", function (event) {
+   return false;
+});
+
+// Se agrega un listener con Jquerry al form para actualizar registros, que cuando se envie se llame a la funcion Updatedetails
+$("#update").on("submit", function (event) {
+
+     // Prevenir el comportamiento predeterminado del formulario
+     event.preventDefault();
+    Updatedetails();
+});
+
+// Funcion que mostrara la primera pagina cunado se realize una busqueda
+function search() {
+    displayData(1);
+}
+
+function paginacion() {
+    displayData(1);
+}
+
+function displayData(page) {
+
+    if (page != null) {
+        actualPag = page
+    }
+
+    var displayData = "true";
+    var searchAdd = $('#search').val();
+    var num_regisAdd = $('#num_regis').val();
+
+    $.ajax({
+        url: "display.php",
+        type: 'POST',
+        data: {
+            displaySend: displayData,
+            searchSend: searchAdd,
+            num_regisSend: num_regisAdd,
+            pageSend: actualPag
+        },
+        success: function (data, status) {
+            $('#displayDataTable').html(data);
+        }
+    });
+}
+
+$("#displayDataTable").on("click", ".btn-danger", function () {
+    confDeleteUsr($(this).closest("tr").find(".id_usr").text());
+    $("#cuerpo").text( "Eliminaras al usuario " + $(this).closest("tr").find(".id_usr").text());
+});
+
+$("#displayDataTable").on("click", ".btn-warning", function () {
+    getUsr($(this).closest("tr").find(".id_usr").text());
+    $("#titleUpdt").text("Editar cita " + $(this).closest("tr").find(".id_usr").text());
+
+
+  //  $("#updategenero").prop("disabled", false)
+//    $("#updatetipo").prop("disabled", false);
+
+    // Campos de entrada a los que se les aplicará el modo de solo lectura
+    var campos = [
+        "#updatenombre",
+        "#updateapellido",
+        "#updatecolonia",
+        "#updatecalle",
+        "#updatetelefono",
+        "#updatenacimiento",
+        "#updateemail",
+        "#updatecontra"
+    ];
+
+    // Agregar el atributo "readonly" a los campos de entrada
+    campos.forEach(function(campo) {
+        $(campo).removeAttr("readonly");
+
+    });
+});
+
+$("#displayDataTable").on("click", ".btn-success", function () {
+    getUsr($(this).closest("tr").find(".id_usr").text());
+    $("#titleUpdt").text("Ver usuario " + $(this).closest("tr").find(".id_usr").text());
+
+    $("#actualizar").hide();
+
+    $("#updategenero").prop("disabled", true)
+    $("#updatetipo").prop("disabled", true);
+
+    // Campos de entrada a los que se les aplicará el modo de solo lectura
+    var campos = [
+        "#updatenombre",
+        "#updateapellido",
+        "#updatecolonia",
+        "#updatecalle",
+        "#updatetelefono",
+        "#updatenacimiento",
+        "#updateemail",
+        "#updatecontra"
+    ];
+
+
+    // Agregar el atributo "readonly" a los campos de entrada
+    campos.forEach(function(campo) {
+        $(campo).attr("readonly", "readonly");
+
+});
+});
+
+$("#displayDataTable").on("click", ".btn-primary", function () {
+   getCita($(this).closest("tr").find(".id_usr").text(), true);
+   //$('#recetaModal').modal('show'); 
+});
+
+
+$("#nuevo").on("click",function () {
+    $("#tipo").val($("#tipo option:first").val());
+    $("#genero").val($("#genero option:first").val());
+
+    $('#nombre').val('');
+    $('#apellido').val('');
+    $('#colonia').val('');
+    $('#calle').val('');
+    $('#telefono').val('');
+    $('#nacimiento').val('');
+    $('#email').val('');
+    $('#contra').val('');
+});
+
+
+
+function addUser() {
+    var numAdd = $('#num').val();
+    var ubiAdd = $('#ubi').val();
+
+
+    $.ajax({
+        url: "insert.php",
+        type: 'POST',
+        data: {
+            numSend: numAdd,
+            ubiSend: ubiAdd,
+        },
+
+        success: function (data, status) {
+            //Display data
+            console.log(status);
+            $('#nuevoModal').modal('hide');
+            $('#eliminarModal').modal('show');
+            $('#cuerpo').text(status);
+            $('#confDel').remove();
+            displayData();
+        },
+        error: function (data, status){
+
+        }
+
+    })
+}
+
+//Eliminar un registro
+
+
+
+function confDeleteUsr(id) {
+    $('#eliminarModal').modal('show');
+    $('#confDel').attr('onclick','deleteUsr('+ id +')');
+    
+}
+
+
+
+
+function deleteUsr(id) {
+    $('#eliminarModal').modal('hide');
+
+    $.post("delete.php",{
+            idSend: id
+        },
+         function (data, status) {
+            displayData();
+
+    });
+}
+
+
+
+// Funcion para obtener los datos de un usuario en espesifico para despues modificar
+function getCita(id) {
+
+    // Se le asigna el valor de id pra
+    $('#hiddenid').val(id)
+
+    // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
+    $.post("update.php", {
+        updateid: id
+    },
+        //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
+        function (data, status) {
+        var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
+        $('#nombreReceta').val(userid.paciente);
+        $('#telReceta').val(userid.telPa);
+        $('#nombreDocReceta').val(userid.doctor);
+        $('#telDocReceta').val(userid.telDoc);
+        $('#especialidadReceta').val(userid.nom_esp);
+
+        var fechaCompleta= userid.fecha_cita;
+        var fecha = fechaCompleta.substring(0, 10);
+        var hora = fechaCompleta.substring(11, 16);
+
+        
+
+        $('#fechaReceta').val(fecha);
+        $('#horaReceta').val(hora);;
+
+
+        //$('#telDocCita').val(userid.telDoc);
+    }); //obtener data
+
+        $('#recetaModal').modal('show'); 
+        
+   
+        
+}
+
+
+// Funcion para obtener los datos de un usuario en espesifico para despues modificar
+function getUsr(id) {
+
+    // Se le asigna el valor de id pra
+    $('#hiddenid').val(id)
+
+    // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
+    $.post("update.php", {
+        updateid: id
+    },
+        //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
+        function (data, status) {
+        var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
+        $('#updateNombreCita').val(userid.paciente);
+        $('#updateTelCita').val(userid.telPa);
+        $('#nombreDocCita').val(userid.doctor);
+        $('#telDocCita').val(userid.telDoc);
+        $('#especialidadCita').val(userid.nom_esp);
+        $('#consCita').val(userid.num_cons);
+        $('#ubiCita').val(userid.ubi_cons);
+
+        var fechaCompleta= userid.fecha_cita;
+        var fecha = fechaCompleta.substring(0, 10);
+        var hora = fechaCompleta.substring(11, 16);
+
+        
+
+        $('#fechaCita').val(fecha);
+        $('#horaCita').val(hora);
+
+
+        //$('#telDocCita').val(userid.telDoc);
+    }); //obtener data
+
+        $('#updateModal').modal('show'); 
+    
+        
+}
+
+// Funcion para actualizar
+function Updatedetails() {
+
+    // Se recuperan los valores y se asignan a variables de js
+
+    var fecha = $('#fechaCita').val();
+    var hora = $('#horaCita').val();
+ 
+    var fechaHoraAdd = fecha + ' ' + hora;
+    var hiddenid = $('#hiddenid').val();
+    var estadoAdd = $('#estado').val();
+
+
+    // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
+
+    $.post("update.php", {
+        hiddenid: hiddenid,
+        updateDate: fechaHoraAdd,
+        updateEstado: estadoAdd,
+    },
+        //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
+        function (data, status) {
+        $('#updateModal').modal('hide'); // Se cierra el modal
+        displayData(); // Se vuelve a mostrar los datos ya actualizados
+    });
+}
+
+
+ // Obtener el elemento select
+ var selectHora = document.getElementById("horaCita");
+
+ // Definir el horario laboral
+ var horaInicio = 9; // Hora de inicio (formato de 24 horas)
+ var horaFin = 17; // Hora de fin (formato de 24 horas)
+ var intervalo = 45; // Intervalo de tiempo (en minutos)
+
+ // Convertir las horas a minutos
+ var inicioEnMinutos = horaInicio * 60;
+ var finEnMinutos = horaFin * 60;
+
+ for (var i = inicioEnMinutos; i < finEnMinutos; i += intervalo) {
+   var horas = Math.floor(i / 60); // Obtener las horas
+   var minutos = i % 60; // Obtener los minutos
+
+   // Formatear las horas y minutos
+   var horaFormateada = ("0" + horas).slice(-2); // Añadir un cero inicial si es necesario
+   var minutosFormateados = ("0" + minutos).slice(-2); // Añadir un cero inicial si es necesario
+
+   // Crear la opción y agregarla al select
+   var opcion = document.createElement("option");
+   opcion.value = horaFormateada + ":" + minutosFormateados;
+   opcion.textContent = horaFormateada + ":" + minutosFormateados;
+   selectHora.appendChild(opcion);
+ }
+
+ 
