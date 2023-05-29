@@ -1,6 +1,4 @@
 
-
-
 var actualPag = 1;
 displayData(actualPag)
 
@@ -8,92 +6,6 @@ $(document).ready(function () {
     displayData();
     $('#search').val("");  //Se limpia el campo de busqueda
 
-
-
-     // Eliminar elemento
-     $(document).on('click', '.delete-btn', function() {
-        $(this).closest('div').remove(); // Eliminar el elemento del DOM
-    });
-
-    // Duplicar elemento
-    $('.duplicate-btn').click(function(event) {
-         // Evitar el comportamiento predeterminado de enviar el formulario
-
-        var originalElement = $(this).closest('.modal-body').find('#divOriginal');
-        var clonedElement = originalElement.clone().removeAttr('hidden'); // Clonar el elemento
-
-        // Limpiar los valores de los campos de entrada
-        clonedElement.find('input').val('');
-
-        // Insertar el elemento clonado después del elemento original
-        originalElement.after(clonedElement);
-
-        // Agregar botón de eliminar al elemento clonado
-        var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn">Eliminar</button>');
-        clonedElement.find('.form-outline').append(deleteButton);
-        return false;
-    });
-
-    $('.save-btn').click(function() {
-        var data = []; // Array para almacenar los datos
-
-        // Recorrer los elementos clonados para obtener los valores adicionales
-        $('.modal-body #divOriginal').nextAll('[id^="divOriginal"]').each(function() {
-            var frecuencia = $(this).find('.frecuencia').val();
-            var medicamentoInput = $(this).find('.exampleDataList');
-            var medicamentoValue = medicamentoInput.val(); // Obtener el valor seleccionado del datalist
-            var medicamentoDataValue = $(this).find('option[value="' + medicamentoValue + '"]').attr('data-medicamentodatavalue');
-
-            data.push({
-                frecuencia: frecuencia,
-                medicamentoDataValue: medicamentoDataValue
-            });
-        });
-
-        // Recorrer los elementos clonados para obtener los valores adicionales
-        $('.modal-body #divOriginalTest').nextAll('[id^="divOriginalTest"]').each(function() {
-            var testInput = $(this).find('.dataListTest');
-            var testValue = testInput.val(); // Obtener el valor seleccionado del datalist
-            var testDataValue = $(this).find('option[value="' + testValue + '"]').attr('data-testdatavalue');
-            data.push({
-                testDataValue: testDataValue
-            });
-        });
-
-        // Enviar los datos a un archivo PHP utilizando AJAX
-        $.ajax({
-            url: 'guardar.php', // Ruta al archivo PHP donde se procesarán los datos
-            type: 'POST',
-            data: { data: data },
-            success: function(response) {
-                // Manejar la respuesta del servidor
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Manejar errores
-                console.error(error);
-            }
-        });
-    });
-
-    // Duplicar elemento
-    $('.duplicateTest-btn').click(function(event) {
-        event.preventDefault(); // Evitar el comportamiento predeterminado de enviar el formulario
-
-        var originalElement = $(this).closest('.modal-body').find('#divOriginalTest');
-        var clonedElement = originalElement.clone().removeAttr('hidden'); // Clonar el elemento
-
-        // Limpiar los valores de los campos de entrada
-        clonedElement.find('input').val('');
-
-        // Insertar el elemento clonado después del elemento original
-        originalElement.after(clonedElement);
-
-        // Agregar botón de eliminar al elemento clonado
-        var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn">Eliminar</button>');
-        clonedElement.find('.form-outline').append(deleteButton);
-        return false;
-    });
 });
 
 // Se agrega un listener con Jquerry al campo de busuqeda, que cuando se precione un tecla se llama a la funcion searh
@@ -300,7 +212,7 @@ function deleteUsr(id) {
 function getCita(id) {
 
     // Se le asigna el valor de id pra
-    $('#hiddenid').val(id)
+    $('#hiddenidtest').val(id)
 
     // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
     $.post("update.php", {

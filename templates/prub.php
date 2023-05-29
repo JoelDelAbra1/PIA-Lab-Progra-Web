@@ -74,9 +74,9 @@ require_once("ti.php");
                 echo '
                 <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../doctor/doctor.php">Doctores</a>
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../receta/receta.php">Recetas</a>
                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../test/test.php">Pruebas</a>
-                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>
-                <a class="list-group-item list-group-item-action p-4 fw-bold" href="../cerrarSesion.php" >Cerar Sesion</a>';
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>'
             ?>
         </div>
     </div>

@@ -3,13 +3,13 @@
 include("../conexion/conexion.php");
 
 // Se guardan las columnas en un array para ser usadas despues
-$columns = ['id_cons','num_cons', 'ubi_cons'];
+$columns = [ 'id_px','id_cita','paciente', 'doctor', 'fecha_cita', 'nom_estado'];
 
 // Se guarda el nombre de la tabla
-$entidad = "consultorio";
+$entidad = "v_receta";
 
 // Se guarda el id
-$id = 'id_cons';
+$id = 'id_cita';
 
 //
 $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_POST['searchSend']) : null;
@@ -68,10 +68,12 @@ if (isset($_POST['displaySend'])) {
         <table class="table table-lg text-center justify-content-center">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Numero de consultorio</th>
-              <th>Ubicacion</th>
-              
+              <th>Id</th>
+              <th>Cita</th>
+              <th>Paciente</th>
+              <th>Doctor</th>
+              <th>Fecha</th>
+             
               <th>Acciones</th>
             </tr>  
     ';
@@ -108,30 +110,36 @@ if (isset($_POST['displaySend'])) {
 
     if ($num_rows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $id_px= $row['id_px'];
+            $id_cita= $row['id_cita']; //este ultiomo es el de la DB
+            $paciente = $row['paciente'];
+            $doctor = $row['doctor'];
+            $fecha_cita = $row['fecha_cita'];
+            $nom_estado = $row['nom_estado'];
 
-            $id_cons= $row['id_cons']; //este ultiomo es el de la DB
-            $num_cons = $row['num_cons'];
-            $ubi_cons = $row['ubi_cons'];
 
-
-        $tabla .= '
-        <tbody>
-                        <tr>
-                            <td class="id_usr">' . $id_cons . '</td>
-                            <td>' . $num_cons . '</td>
-                            <td>' . $ubi_cons . '</td>
-                         
-                            <td>
-<button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
-<button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
-
-                            </td>
-                        </tr>
-
-                       
-
+            $tabla .= '
+            <tbody>
+                <tr> 
+                <td class="id_usr">' . $id_px . '</td>
+                <td>' . $id_cita . '</td>
+                   
+                    <td>' . $paciente . '</td>
+                    <td>' . $doctor . '</td>
                     
+                    <td>' . $fecha_cita . '</td>
+                    ';
+                    
+        $tabla .= '
+                    <td>
+                        <button class="btn btn-sm btn-primary"><i class="fas fa-file-prescription"></i></button>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-eraser"></i></button>
+                    </td>
+                </tr>
+            </tbody>
         ';
+        
     }
 }
 else {
@@ -171,10 +179,6 @@ else {
         $totalPags = ceil($output['totalRegis'] / $limit);
         $tabla .= ' <nav aria-label="Page navigation example"
         <ul class= "pagination"> ';
-
-
-
-
     }
 
 

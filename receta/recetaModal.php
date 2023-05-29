@@ -68,63 +68,14 @@
                                     readonly />
                             </div>
 
-                            <h3 class="text-center">Cuerpo de la receta</h3>
+                            <h3 class="text-center">Cuerpo de la receta:</h3>
 
+                            <label for="med" class="form-label">Medicamentos:</label>
+                            <textarea class="form-control border border-secondary " id="med" rows="5" readonly></textarea>
+
+                            <label for="test" class="form-label">Pruebas:</label>
+                            <textarea class="form-control border border-secondary " id="test" rows="5" readonly></textarea>
                             
-                            <div id="divOriginal" hidden>
-                        <div class="form-outline mb-4">
-                        <!-- Consulta a la base de datos para obtener los medicamentos -->
-                        <?php
-                        include('../conexion/conexion.php'); // Archivo de conexión a la base de datos
-
-                        $sql = "SELECT * FROM medicamento";
-                        $resultado = mysqli_query($conexion, $sql);
-                        ?>
-
-                        <!-- Creación del datalist -->
-                        <input class="form-control exampleDataList" list="medicamentos" placeholder="Type to search...">
-                        <datalist id="medicamentos">
-                            <?php while ($row = mysqli_fetch_assoc($resultado)) : ?>
-                                <option value="<?php echo $row['nom_med']; ?>" data-medicamentodatavalue="<?php echo $row['id_med']; ?>"></option>
-                            <?php endwhile; ?>
-                        </datalist>
-
-                        <!-- Ubi Consultorio input -->
-                            <label for="frecuencia">Hora</label>
-                            <input type="text" class="form-control border border-secondary frecuencia" />
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-sm duplicate-btn">Duplicar</button> <!-- Botón de duplicar -->
-
-<div>
-                    <div id="divOriginalTest" hidden>
-                        <div class="form-outline mb-4">
-                        <!-- Consulta a la base de datos para obtener los medicamentos -->
-                        <?php
-                        include('../conexion/conexion.php'); // Archivo de conexión a la base de datos
-
-                        $sql = "SELECT * FROM test";
-                        $resultado = mysqli_query($conexion, $sql);
-                        ?>
-
-                        <!-- Creación del datalist -->
-                        <input class="form-control dataListTest" list="test" placeholder="MEd...">
-                        <datalist id="test">
-                            <?php while ($row = mysqli_fetch_assoc($resultado)) : ?>
-                                <option value="<?php echo $row['nom_test']; ?>" data-testdatavalue="<?php echo $row['id_test']; ?>"></option>
-                            <?php endwhile; ?>
-                        </datalist>
-                        </div>
-                    </div>
-                    
-</div>
-
-                    <button class="btn btn-primary btn-sm duplicateTest-btn">Duplicar test</button> <!-- Botón de duplicar -->
-
-
-                    <button class="btn btn-success btn-sm save-btn">Guardar</button> <!-- Botón de guardar -->
-
-
 
                             <input type="hidden" id="hiddenidtest">
 

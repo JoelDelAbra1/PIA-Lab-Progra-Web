@@ -1,12 +1,11 @@
 
-
-
 var actualPag = 1;
 displayData(actualPag)
 
 $(document).ready(function () {
     displayData();
     $('#search').val("");  //Se limpia el campo de busqueda
+
 });
 
 // Se agrega un listener con Jquerry al campo de busuqeda, que cuando se precione un tecla se llama a la funcion searh
@@ -24,8 +23,15 @@ $("#add").on("submit", function () {
     addUser();
 });
 
+$("#addReceta").on("submit", function (event) {
+   return false;
+});
+
 // Se agrega un listener con Jquerry al form para actualizar registros, que cuando se envie se llame a la funcion Updatedetails
-$("#update").on("submit", function () {
+$("#update").on("submit", function (event) {
+
+     // Prevenir el comportamiento predeterminado del formulario
+     event.preventDefault();
     Updatedetails();
 });
 
@@ -65,17 +71,16 @@ function displayData(page) {
 
 $("#displayDataTable").on("click", ".btn-danger", function () {
     confDeleteUsr($(this).closest("tr").find(".id_usr").text());
-    $("#cuerpo").text( "Eliminaras la cita: " + $(this).closest("tr").find(".id_usr").text());
+    $("#cuerpo").text( "Eliminaras al usuario " + $(this).closest("tr").find(".id_usr").text());
 });
 
 $("#displayDataTable").on("click", ".btn-warning", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Editar Consultorio #" + $(this).closest("tr").find(".id_usr").text())
+    $("#titleUpdt").text("Editar cita " + $(this).closest("tr").find(".id_usr").text());
 
-    $("#actualizar").show();
 
-    $("#updategenero").prop("disabled", false)
-    $("#updatetipo").prop("disabled", false);
+  //  $("#updategenero").prop("disabled", false)
+//    $("#updatetipo").prop("disabled", false);
 
     // Campos de entrada a los que se les aplicará el modo de solo lectura
     var campos = [
@@ -125,6 +130,13 @@ $("#displayDataTable").on("click", ".btn-success", function () {
 });
 });
 
+$("#displayDataTable").on("click", ".btn-primary", function () {
+    $('#test').val('');
+$('#med').val('');
+   getCita($(this).closest("tr").find(".id_usr").text(), true);
+
+   //$('#recetaModal').modal('show'); 
+});
 
 
 $("#nuevo").on("click",function () {
@@ -179,6 +191,7 @@ function addUser() {
 function confDeleteUsr(id) {
     $('#eliminarModal').modal('show');
     $('#confDel').attr('onclick','deleteUsr('+ id +')');
+    
 }
 
 
@@ -199,6 +212,77 @@ function deleteUsr(id) {
 
 
 // Funcion para obtener los datos de un usuario en espesifico para despues modificar
+function getCita(id) {
+
+    // Se le asigna el valor de id pra
+    $('#hiddenidtest').val(id)
+
+    // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
+    $.post("update.php", {
+        updateid: id
+    },
+        //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
+        function (data, status) {
+        var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
+        $('#nombreReceta').val(userid.paciente);
+        $('#telReceta').val(userid.telPa);
+        $('#nombreDocReceta').val(userid.doctor);
+        $('#telDocReceta').val(userid.telDoc);
+        $('#especialidadReceta').val(userid.nom_esp);
+        var nom_med = userid.nom_med;
+        var frec_med = userid.frec_med;
+        var test = userid.nom_test;
+
+        var test_array = test.split(",");
+        var test_con_salto = ""; // Inicializar la variable test_con_salto
+
+        // Almacenar los elementos uno a uno con un salto de línea
+    for (var i = 0; i < test_array.length; i++) {
+        test_con_salto +=  test_array[i] + "\n"; 
+        $('#test').val(test_con_salto);
+      }
+
+     
+
+
+        var frec_med_array = frec_med.split(",");
+var nom_med_array = nom_med.split(",");
+if (frec_med_array.length === nom_med_array.length) {
+    // Variable para almacenar los elementos con saltos de línea
+    var elementos_con_salto = "";
+  
+    // Almacenar los elementos uno a uno con un salto de línea
+    for (var i = 0; i < frec_med_array.length; i++) {
+      elementos_con_salto += "Medicamento:" + nom_med_array[i] + "\n" + "Frecuencia: " + frec_med_array[i] + "\n";
+    }
+  
+    $('#med').val(elementos_con_salto);
+}
+
+        var fechaCompleta= userid.fecha_cita;
+        var fecha = fechaCompleta.substring(0, 10);
+        var hora = fechaCompleta.substring(11, 16);
+
+        
+
+        $('#fechaReceta').val(fecha);
+        $('#horaReceta').val(hora);;
+
+
+    
+
+
+        //$('#telDocCita').val(userid.telDoc);
+    }); //obtener data
+
+        $('#recetaModal').modal('show'); 
+        
+   
+        
+}
+
+
+// Funcion para obtener los datos de un usuario en espesifico para despues modificar
 function getUsr(id) {
 
     // Se le asigna el valor de id pra
@@ -211,10 +295,30 @@ function getUsr(id) {
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
         var userid = JSON.parse(data); // Se convierte a JSON los datos obtenidos
-        $('#updatenum').val(userid.num_cons);
-        $('#updateubi').val(userid.ubi_cons);
+        $('#updateNombreCita').val(userid.paciente);
+        $('#updateTelCita').val(userid.telPa);
+        $('#nombreDocCita').val(userid.doctor);
+        $('#telDocCita').val(userid.telDoc);
+        $('#especialidadCita').val(userid.nom_esp);
+        $('#consCita').val(userid.num_cons);
+        $('#ubiCita').val(userid.ubi_cons);
+
+        var fechaCompleta= userid.fecha_cita;
+        var fecha = fechaCompleta.substring(0, 10);
+        var hora = fechaCompleta.substring(11, 16);
+
+        
+
+        $('#fechaCita').val(fecha);
+        $('#horaCita').val(hora);
+
+
+        //$('#telDocCita').val(userid.telDoc);
     }); //obtener data
-    $('#updateModal').modal('show');
+
+        $('#updateModal').modal('show'); 
+    
+        
 }
 
 // Funcion para actualizar
@@ -222,18 +326,20 @@ function Updatedetails() {
 
     // Se recuperan los valores y se asignan a variables de js
 
-    var updatenum = $('#updatenum').val();
-    var updateubi = $('#updateubi').val();
-
+    var fecha = $('#fechaCita').val();
+    var hora = $('#horaCita').val();
+ 
+    var fechaHoraAdd = fecha + ' ' + hora;
     var hiddenid = $('#hiddenid').val();
+    var estadoAdd = $('#estado').val();
 
 
     // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
 
     $.post("update.php", {
         hiddenid: hiddenid,
-        updatenum: updatenum,
-        updateubi: updateubi,
+        updateDate: fechaHoraAdd,
+        updateEstado: estadoAdd,
     },
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
@@ -241,3 +347,33 @@ function Updatedetails() {
         displayData(); // Se vuelve a mostrar los datos ya actualizados
     });
 }
+
+
+ // Obtener el elemento select
+ var selectHora = document.getElementById("horaCita");
+
+ // Definir el horario laboral
+ var horaInicio = 9; // Hora de inicio (formato de 24 horas)
+ var horaFin = 17; // Hora de fin (formato de 24 horas)
+ var intervalo = 45; // Intervalo de tiempo (en minutos)
+
+ // Convertir las horas a minutos
+ var inicioEnMinutos = horaInicio * 60;
+ var finEnMinutos = horaFin * 60;
+
+ for (var i = inicioEnMinutos; i < finEnMinutos; i += intervalo) {
+   var horas = Math.floor(i / 60); // Obtener las horas
+   var minutos = i % 60; // Obtener los minutos
+
+   // Formatear las horas y minutos
+   var horaFormateada = ("0" + horas).slice(-2); // Añadir un cero inicial si es necesario
+   var minutosFormateados = ("0" + minutos).slice(-2); // Añadir un cero inicial si es necesario
+
+   // Crear la opción y agregarla al select
+   var opcion = document.createElement("option");
+   opcion.value = horaFormateada + ":" + minutosFormateados;
+   opcion.textContent = horaFormateada + ":" + minutosFormateados;
+   selectHora.appendChild(opcion);
+ }
+
+ 

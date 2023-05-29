@@ -19,7 +19,7 @@
   <header>
     <style>
       #intro {
-        background-image: url(https://mdbootstrap.com/img/new/fluid/city/008.jpg);
+        background-image: url(imagenes/fondologin);
         height: 100vh;
       }
 
@@ -90,7 +90,7 @@
     <!-- Navbar -->
 
     <!-- Background image -->
-    <div id="intro" class="bg-image shadow-2-strong">
+    <div id="intro" class="bg-image shadow-2">
       <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
         <div class="container">
           <div class="row justify-content-center">
@@ -116,24 +116,24 @@
 
                   $sql = "select * from users where email_usr = '" . $email . "' AND pass_usr ='" . $pass . "' AND id_tipo = '" . $tipo . "'";
 
-                 
+
 
 
                   $resultado = mysqli_query($conexion, $sql);
 
-                  
 
 
-                  if ($fila = mysqli_fetch_assoc($resultado)){
+
+                  if ($fila = mysqli_fetch_assoc($resultado)) {
                     $nombre = $fila['nom_usr'];
 
                     echo $nombre;
                     echo "Prueba";
-// Asignar el nombre a la variable de sesión
+                    // Asignar el nombre a la variable de sesión
                     $_SESSION["nombre"] = $nombre;
 
 
-                    echo "<h1>!Bienvenidsdfsdfo! ". $nombre ." </h1><br><h1>hola</h1><br><a href='user/prub.php'>Entrar</a>";
+                    echo "<h1>!Bienvenidsdfsdfo! " . $nombre . " </h1><br><h1>hola</h1><br><a href='user/prub.php'>Entrar</a>";
                   } else {
                     echo "<script languaje = 'javaScript'>
                       alert('Cedula o nombre incorrectos');
@@ -147,6 +147,12 @@
                 <!-- form -->
                 <form class="bg-white rounded shadow-5-strong p-5" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
 
+                  <div class="text-center">
+                    <img src="imagenes/loginUsr.png"  class="rounded" height="150px">
+                  </div>
+
+                  <br>
+
                   <!-- Email input -->
                   <div class="form-outline mb-4">
                     <input type="email" name="email_usr" class="form-control" required />
@@ -155,14 +161,14 @@
 
                   <!-- Password input -->
                   <div class="form-outline mb-4">
-                    <input id="campoContra" type="password" name="pass_usr" class="form-control" required/>
+                    <input id="campoContra" type="password" name="pass_usr" class="form-control" required />
                     <label class="form-label" for="campoContra">Contraseña</label>
                   </div>
 
                   <!-- Rol input -->
                   <div class="form-outline mb-4">
-                    
-                      
+
+
                     <select name="tipo_usr" class="form-select" id="select-log">
                       <?php
                       include("conexion/conexion.php");
@@ -179,7 +185,7 @@
                         <?php
                       }
                       ?>
-                    </select><br><br>
+                    </select>
 
                   </div>
                   <?php
@@ -198,47 +204,7 @@
   </header>
   <!--Main Navigation-->
 
-  <!--Footer-->
-  <footer class="bg-light text-lg-start">
-    <div class="py-4 text-center">
-      <a role="button" class="btn btn-primary btn-lg m-2"
-        href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
-        Learn Bootstrap 5
-      </a>
-      <a role="button" class="btn btn-primary btn-lg m-2" href="https://mdbootstrap.com/docs/standard/" target="_blank">
-        Download MDB UI KIT
-      </a>
-    </div>
 
-    <hr class="m-0" />
-
-    <div class="text-center py-4 align-items-center">
-      <p>Follow MDB on social media</p>
-      <a href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" class="btn btn-primary m-1" role="button"
-        rel="nofollow" target="_blank">
-        <i class="fab fa-youtube"></i>
-      </a>
-      <a href="https://www.facebook.com/mdbootstrap" class="btn btn-primary m-1" role="button" rel="nofollow"
-        target="_blank">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://twitter.com/MDBootstrap" class="btn btn-primary m-1" role="button" rel="nofollow"
-        target="_blank">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="https://github.com/mdbootstrap/mdb-ui-kit" class="btn btn-primary m-1" role="button" rel="nofollow"
-        target="_blank">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
   <!--Footer-->
   <!-- MDB -->
   <script type="text/javascript" src="js/mdb.min.js"></script>

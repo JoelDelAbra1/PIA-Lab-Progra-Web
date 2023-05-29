@@ -3,7 +3,7 @@
 
 <!-- Se le da el valor al bloque de titulo -->
 <?php startblock('title') ?>
-Consultorios
+Citas
 <?php endblock() ?>
 <!-- Fin del bloque titulo -->
 
@@ -12,18 +12,18 @@ Consultorios
 
 <!-- Contenido de la pagina -->
 <div class="container-fluid ">
-    <h1 id="tituloprueb" class="mt-4 text-center">Consultorio</h1>
+    <h1 id="tituloprueb" class="mt-4 text-center">Citas</h1>
     <br>
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">
 
-            <!-- Boton de nuevo registro-->
+            <!-- Boton de nuevo registro
             <div class="col-4">
                 <button type="button" id="nuevo" class="btn btn-dark" data-bs-toggle="modal"
                         data-bs-target="#nuevoModal">
                     Nuevo
                 </button>
-            </div>
+            </div>-->
 
             <!-- Campo de busqueda -->
             <div class="col-4">
@@ -36,7 +36,7 @@ Consultorios
             <!-- Campo para selecionar cuantos reistros ver-->
             <div class="col-auto">
                 <select name="num_regis" id="num_regis" class="form-select">
-                    <option value="1">5</option>
+                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                 </select>
@@ -62,6 +62,9 @@ Consultorios
 <!-- Modal Aviso ELiminar -->
 <?php include('confDel.php'); ?>
 
+<!-- Modal citas ELiminar -->
+<?php include('recetaModal.php'); ?>
+
 <!-- Fin del bloque contenido-->
 <?php endblock() ?>
 
@@ -69,7 +72,7 @@ Consultorios
 <!-- Inicia el bloque js-->
 <?php startblock('js') ?>
 
-<script src="receta.js"></script>
+<script src="cita.js"></script>
 
 <!-- Fin del bloue js-->
 <?php endblock() ?>

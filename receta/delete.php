@@ -10,7 +10,7 @@ if(isset($_POST['idSend'])){
 
     // Consulta SQL
     $sql="DELETE FROM cita where id_cita = $id_cita";
-    echo $sql;
+
     //Se ejecuta la consulta
     $result=mysqli_query($conexion,$sql);
 }
