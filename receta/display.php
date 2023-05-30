@@ -137,12 +137,17 @@ if (isset($_POST['displaySend'])) {
                     
                     <td>' . $fecha_cita . '</td>
                     ';
-                    
+
        if ($tipo == 1){
+
            $tabla .= '
                     <td>
-                      
-                        <button class="btn btn-sm btn-primary"><i class="fas fa-file-prescription"></i></button>
+                     
+                     <button class="btn btn-sm btn-primary">
+                <a href="../imprimir.php?id_px=' . $id_px . '" target="_blank" class="text-light">
+                    Imprimir
+                </a>
+            </button>
                         
                         <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
                         <button class="btn btn-sm btn-danger"><i class="fas fa-eraser"></i></button>
@@ -151,15 +156,15 @@ if (isset($_POST['displaySend'])) {
             </tbody>
         ';
        }else{
-           $tabla .= '
-                    <td>
 
-                        <button class="btn btn-sm btn-primary"><i class="fas fa-file-prescription"></i></button>
-         
-                    </td>
-                </tr>
-            </tbody>
-        ';
+           $tabla .= '
+<td>
+<button class="btn btn-sm btn-primary"><i class="fas fa-file-prescription"></i></button>
+<a href="../imprimir.php?id_px=' . $id_px . '" target="_blank">Imprimir Receta</a>
+</td>
+</tr>
+</tbody>
+';
        }
         
     }

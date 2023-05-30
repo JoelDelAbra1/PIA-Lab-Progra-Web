@@ -242,9 +242,6 @@ function getCita(id) {
         $('#test').val(test_con_salto);
       }
 
-     
-
-
         var frec_med_array = frec_med.split(",");
 var nom_med_array = nom_med.split(",");
 if (frec_med_array.length === nom_med_array.length) {
