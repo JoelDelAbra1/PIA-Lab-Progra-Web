@@ -116,9 +116,6 @@
 
                   $sql = "select * from users where email_usr = '" . $email . "' AND pass_usr ='" . $pass . "' AND id_tipo = '" . $tipo . "'";
 
-
-
-
                   $resultado = mysqli_query($conexion, $sql);
 
 
@@ -131,9 +128,7 @@
                     echo "Prueba";
                     // Asignar el nombre a la variable de sesión
                     $_SESSION["nombre"] = $nombre;
-
-
-                    echo "<h1>!Bienvenidsdfsdfo! " . $nombre . " </h1><br><h1>hola</h1><br><a href='user/prub.php'>Entrar</a>";
+                    header("Location: Citas/citas.php");
                   } else {
                     echo "<script languaje = 'javaScript'>
                       alert('Cedula o nombre incorrectos');

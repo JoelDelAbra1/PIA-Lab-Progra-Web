@@ -73,7 +73,7 @@ if (isset($_POST['displaySend'])) {
               <th>Doctor</th>
               <th>Fecha</th>
               <th>Estado</th>
-              <th>Acciones</th>
+              <th>Acciónes</th>
             </tr>  
     ';
 
@@ -130,13 +130,16 @@ if (isset($_POST['displaySend'])) {
         $badge_class = '';
         switch ($nom_estado) {
             case 'Pendiente':
-                $badge_class = 'badge badge-success';
+                $badge_class = 'badge badge-warning';
                 break;
             case 'Confirmada':
-                $badge_class = 'badge badge-warning';
+                $badge_class = 'badge badge-info';
                 break;
             case 'Cancelada':
                 $badge_class = 'badge badge-danger';
+                break;
+            case 'Completada':
+                $badge_class = 'badge badge-success';
                 break;
             default:
                 $badge_class = 'badge badge-secondary';
@@ -159,7 +162,7 @@ else {
     $tabla .= '
         <tbody>
             <tr>
-                <td colspan="4">No se encontraron resultados</td>
+                <td colspan="6">No se encontraron resultados</td>
             </tr>
         </tbody>
     ';

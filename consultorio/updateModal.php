@@ -23,7 +23,7 @@
                                  <div class="form-outline mb-4">
                                      <label for="updateubi">Ubicación</label>
                                      <input id="updateubi" type="text" class="form-control border border-secondary"
-                                            required />
+                                            pattern="[A-Za-z\s]+" title="Ingresa solo letras" required />
                                  </div>
 
                         </div>

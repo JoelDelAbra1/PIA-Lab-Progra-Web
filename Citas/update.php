@@ -31,7 +31,7 @@ if(isset($_POST['hiddenid'])){
 // acrualiza los valores en la base de datos
 $sql = "UPDATE cita set fecha_cita ='$fecha_cita', id_estado = '$id_estado' WHERE id_cita= $id_cita" ;
 
-echo '<script>alert("' . $sql . '");</script>';
+
                  $result=mysqli_query($conexion, $sql);
 }
 ?>

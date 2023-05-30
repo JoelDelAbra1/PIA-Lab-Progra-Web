@@ -1,4 +1,5 @@
 
+
 var actualPag = 1;
 displayData(actualPag)
 
@@ -308,8 +309,10 @@ function Updatedetails() {
     },
         //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
         function (data, status) {
+
         $('#updateModal').modal('hide'); // Se cierra el modal
-        displayData(); // Se vuelve a mostrar los datos ya actualizados
+            displayData(); // Se vuelve a mostrar los datos ya actualizados
+            Notiflix.Notify.Success('Se actualizo correctamente');
     });
 }
 

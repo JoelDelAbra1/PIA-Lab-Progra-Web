@@ -17,6 +17,13 @@ if (
 
     //Se ejecuta la consulta
     $result=mysqli_query($conexion, $sql);
+    if (!$result) {
+        // Si hay un error en la ejecución de la consulta, devuelve una respuesta JSON con el error
+        echo json_encode(['error' => true]);
+    } else {
+        // Si la consulta se ejecuta correctamente, devuelve una respuesta JSON sin errores
+        echo json_encode(['error' => false]);
+    }
 }
 
 ?>

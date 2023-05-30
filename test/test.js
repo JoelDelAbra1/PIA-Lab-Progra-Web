@@ -20,12 +20,14 @@ $("#num_regis").on("change", function () {
 });
 
 // Se agrega un listener con Jquerry al form para crear registros, que cuando se envie se llama a la funcion addUsr
-$("#add").on("submit", function () {
+$("#add").on("submit", function (event) {
+    event.preventDefault();
     addUser();
 });
 
 // Se agrega un listener con Jquerry al form para actualizar registros, que cuando se envie se llame a la funcion Updatedetails
-$("#update").on("submit", function () {
+$("#update").on("submit", function (event) {
+    event.preventDefault();
     Updatedetails();
 });
 

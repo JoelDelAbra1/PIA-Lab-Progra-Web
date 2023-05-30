@@ -20,12 +20,14 @@ $("#num_regis").on("change", function () {
 });
 
 // Se agrega un listener con Jquerry al form para crear registros, que cuando se envie se llama a la funcion addUsr
-$("#add").on("submit", function () {
+$("#add").on("submit", function (event) {
+    event.preventDefault();
     addUser();
 });
 
 // Se agrega un listener con Jquerry al form para actualizar registros, que cuando se envie se llame a la funcion Updatedetails
-$("#update").on("submit", function () {
+$("#update").on("submit", function (event) {
+    event.preventDefault();
     Updatedetails();
 });
 
@@ -65,12 +67,12 @@ function displayData(page) {
 
 $("#displayDataTable").on("click", ".btn-danger", function () {
     confDeleteUsr($(this).closest("tr").find(".id_usr").text());
-    $("#cuerpo").text( "Eliminaras al usuario " + $(this).closest("tr").find(".id_usr").text());
+    $("#cuerpo").text( "Eliminaras el consultorio #" + $(this).closest("tr").find(".id_usr").text());
 });
 
 $("#displayDataTable").on("click", ".btn-warning", function () {
     getUsr($(this).closest("tr").find(".id_usr").text());
-    $("#titleUpdt").text("Editar Consultorio #" + $(this).closest("tr").find(".id_usr").text())
+    $("#titleUpdt").text("Editar consultorio #" + $(this).closest("tr").find(".id_usr").text())
 
     $("#actualizar").show();
 
@@ -157,16 +159,14 @@ function addUser() {
         },
 
         success: function (data, status) {
-            //Display data
-            console.log(status);
+
+
+            Notiflix.Notify.Success('Se agrego correctamente');
             $('#nuevoModal').modal('hide');
-            $('#eliminarModal').modal('show');
-            $('#cuerpo').text(status);
-            $('#confDel').remove();
             displayData();
         },
         error: function (data, status){
-
+            Notiflix.Notify.failure('No se agrego correctamente');
         }
 
     })
@@ -191,10 +191,20 @@ function deleteUsr(id) {
     $.post("delete.php",{
             idSend: id
         },
-         function (data, status) {
-            displayData();
-
-    });
+         function (response) {
+             if (response.error) {
+                 // Si hay un error en la ejecución de la consulta, muestra una notificación de error
+                 Notiflix.Notify.Failure('Error en la consulta SQL.');
+             } else {
+                 // Si la consulta se ejecuta correctamente, muestra una notificación de éxito
+                 Notiflix.Notify.Success('Consulta SQL ejecutada correctamente.');
+                 displayData()
+             }
+         }, 'json')
+        .fail(function() {
+            // Si hay un error en la petición POST, muestra una notificación de error
+            Notiflix.Notify.Failure('Error en la petición POST.');
+        });
 }
 
 
@@ -231,14 +241,22 @@ function Updatedetails() {
 
     // jQuery para realizar una solicitud AJAX al archivo "update.php", con metodo POST
 
-    $.post("update.php", {
+    $.ajax({
+                url: "update.php",
+            type: 'POST',
+            data:  {
         hiddenid: hiddenid,
         updatenum: updatenum,
         updateubi: updateubi,
     },
-        //función de devolución de llamada que se ejecutará cuando la solicitud AJAX se complete
-        function (data, status) {
+        success: function (data, status) {
+            Notiflix.Notify.Success('Se actualizo correctamente');
         $('#updateModal').modal('hide'); // Se cierra el modal
         displayData(); // Se vuelve a mostrar los datos ya actualizados
+    },
+    error: function (data, status){
+        Notiflix.Notify.failure('Qui timide rogat docet negare');
+    }
+
     });
 }

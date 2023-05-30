@@ -18,12 +18,8 @@ require_once("ti.php");
   </title>
 
 
-  <script src="dist/notiflix-report-aio-X.X.X.min.js"></script>
-<link rel="stylesheet" href="dist/notiflix-X.X.X.min.css" />
-<script src="dist/notiflix-X.X.X.min.js"></script>
-<script src="dist/notiflix-aio-X.X.X.min.js"></script>
-
-
+    <!-- Agrega los enlaces a los archivos CSS de Notiflix -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notiflix@2.7.0/dist/notiflix-aio-2.7.0.min.css">
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -70,7 +66,7 @@ require_once("ti.php");
                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
                         <a class="list-group-item list-group-item-action p-4 fw-bold flex-grow-1" href="#!">Status</a>';
                 }
-                
+
                 echo '
                 <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../doctor/doctor.php">Doctores</a>
@@ -107,7 +103,7 @@ $nombre = $_SESSION["nombre"];
                             echo '<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. $nombre .'</a>';
                             ?>
-                                
+
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#!">Mis datos</a>
                                     <a class="dropdown-item" href="../cerrarSesion.php">Cerrar Sesion</a>
@@ -124,7 +120,7 @@ $nombre = $_SESSION["nombre"];
             <?php startblock('contet') ?>
                             <?php endblock() ?>
 
-          
+
 
             <!-- Importamos JQuery -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -134,6 +130,8 @@ $nombre = $_SESSION["nombre"];
             <script src="../js/scripts.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+            <!-- Agrega el enlace al archivo JavaScript de Notiflix -->
+            <script src="https://cdn.jsdelivr.net/npm/notiflix@2.7.0/dist/notiflix-aio-2.7.0.min.js"></script>
 
             <?php startblock('js') ?>
                             <?php endblock() ?>

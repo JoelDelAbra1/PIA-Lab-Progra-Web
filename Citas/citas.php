@@ -35,6 +35,7 @@ Citas
 
             <!-- Campo para selecionar cuantos reistros ver-->
             <div class="col-auto">
+
                 <select name="num_regis" id="num_regis" class="form-select">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -51,7 +52,7 @@ Citas
     <div id="displayDataTable" class="bg-light justify-content-center">
     </div>
 </div>
-</div>
+
 
 <!-- Modal Nuevo-->
 <?php include('nuevoModal.php'); ?>
