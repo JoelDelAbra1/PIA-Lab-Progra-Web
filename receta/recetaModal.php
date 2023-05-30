@@ -82,7 +82,7 @@
                             <div class="modal-footer">
                                 <button type="button" id="closeNew" class="btn btn-danger"
                                     data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-dark">Guardar</button>
+                                <button type="submit" class="btn btn-dark" <?php if ($tipo =3){echo 'hidden';}?>>Guardar</button>
                             </div>
                         </form>
                     </div>

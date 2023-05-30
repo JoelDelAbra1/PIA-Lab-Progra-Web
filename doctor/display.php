@@ -2,6 +2,9 @@
 // Se incluye la conexion a la DB
 include("../conexion/conexion.php");
 
+session_start();
+$tipo = $_SESSION["tipo"];
+
 // Se guardan las columnas en un array para ser usadas despues
 $columns = ['id_doc','nombre_doc', 'nom_esp', 'num_cons'];
 
@@ -123,25 +126,47 @@ if (isset($_POST['displaySend'])) {
                             <td>' . $nom_esp . '</td>
                             <td>' . $num_cons . '</td>
                          
-                            <td>
+                         
+        ';
+            if($tipo == 1){
+                $tabla .= '
+        
+            <td>
+
 <button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
 <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
 <button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
+                            </td>
+                        </tr>
+                    ';
+            }
+        elseif($tipo == 2){
+            $tabla .= '
+        
+            <td>
+<button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
+<button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
 
                             </td>
                         </tr>
+                    ';
+        }else{
+            $tabla .= '
+        
+            <td>
+<button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
 
-                       
-
-                    
-        ';
+                            </td>
+                        </tr>
+                    ';
+        }
     }
 }
 else {
     $tabla .= '
         <tbody>
             <tr>
-                <td colspan="5">No se encontraron resultados</td>
+                <td colspan="6">No se encontraron resultados</td>
             </tr>
         </tbody>
     ';

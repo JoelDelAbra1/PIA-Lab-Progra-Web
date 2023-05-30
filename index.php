@@ -121,9 +121,10 @@
 
 
 
+
                   if ($fila = mysqli_fetch_assoc($resultado)) {
                     $nombre = $fila['nom_usr'];
-
+                    $_SESSION["id_usr"] = $fila["id_usr"];
                     echo $nombre;
                     echo "Prueba";
                     // Asignar el nombre a la variable de sesión

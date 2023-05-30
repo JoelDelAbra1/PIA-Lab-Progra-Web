@@ -1,5 +1,7 @@
 <!-- Se incluye la plantilla base -->
-<?php include('../templates/prub.php'); ?>
+<?php include('../templates/prub.php');
+
+?>
 
 <!-- Se le da el valor al bloque de titulo -->
 <?php startblock('title') ?>

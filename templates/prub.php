@@ -59,20 +59,20 @@ require_once("ti.php");
 
                 if ($tipo == 1) {
                     echo '
-                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
-                        <a class="list-group-item list-group-item-action p-4 fw-bold flex-grow-1" href="#!">Status</a>';
+                                      
+                        <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a> 
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>    
+                                            
+                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../test/test.php">Pruebas</a> ';
                 } else if($tipo == 2) {
                     echo '
-                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../consultorio/consultorio.php">Consultorios</a>
-                        <a class="list-group-item list-group-item-action p-4 fw-bold flex-grow-1" href="#!">Status</a>';
+                          <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Pacientes</a> ';
                 }
-
                 echo '
-                <a id="h" class="list-group-item list-group-item-action p-4 fw-bold" href="../user/prub.php">Usuarios</a>
                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../doctor/doctor.php">Doctores</a>
                         <a class="list-group-item list-group-item-action p-4 fw-bold" href="../receta/receta.php">Recetas</a>
-                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../test/test.php">Pruebas</a>
-                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>'
+                        <a class="list-group-item list-group-item-action p-4 fw-bold" href="../Citas/citas.php">Citas</a>';
+
             ?>
         </div>
     </div>
@@ -94,6 +94,7 @@ require_once("ti.php");
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                             <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../cerrarSesion.php">Cerrar Sesion</a></li>
                             <li class="nav-item dropdown">
 
                             <?php

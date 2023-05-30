@@ -37,7 +37,7 @@
 
                             <div class="form-outline mb-4">
                                 <label for="fecha">Fecha:</label>
-                                <input type="date" id="fecha" class="form-control border border-secondary"min="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" id="fecha" class="form-control border border-secondary"min="<?php echo date('Y-m-d'); ?>" required>
                             </div>
 
                             <div class="form-outline mb-4">
@@ -48,7 +48,7 @@
 
                              <!-- Selecionar usuario-->
                              <label for="doc">Usuario</label>
-                            <select class="form-select border border-secondary form-control form-outline" id="doc">
+                            <select class="form-select border border-secondary form-control form-outline" id="doc" <?php if ($tipo == 2 ){echo 'disabled';}?>>
                                 <!-- Se consiguen los usurarios que existen-->
                                 <?php
                                 include("../conexion/conexion.php");
@@ -65,6 +65,9 @@
                                     <?php
                                 }
                                 ?>
+                                <option value="<?php echo $id_usr; ?>">
+                                    <?php echo $nombre; ?>
+                                </option>
                             </select>
 
 

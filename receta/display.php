@@ -1,7 +1,9 @@
 <?php
 // Se incluye la conexion a la DB
 include("../conexion/conexion.php");
+session_start();
 
+$tipo = $_SESSION["tipo"];
 // Se guardan las columnas en un array para ser usadas despues
 $columns = [ 'id_px','id_cita','paciente', 'doctor', 'fecha_cita', 'nom_estado'];
 
@@ -16,9 +18,9 @@ $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_P
 
 // Varaiable que nos ayudara a la busqueda
 $where = "";
-
+$id_usr = $_SESSION["id_usr"];
 // Se comprueba si se esta realizando una bisqueda
-if ($search != null) {
+if ($search != null || $tipo != 1) {
 
     //Si es verdad se empieza a crear una consulta con los valores
     $where = "WHERE (";
@@ -34,6 +36,12 @@ if ($search != null) {
     // Se termina la consulta y se quita el OR
     $where = substr_replace($where, "", -3);
     $where .= ")";
+    if ($tipo == 2){
+        $where .= " AND id_doc = $id_usr";
+    }
+    if ($tipo == 3){
+        $where .= " AND id_usr = $id_usr";
+    }
 }
 
 
@@ -130,15 +138,29 @@ if (isset($_POST['displaySend'])) {
                     <td>' . $fecha_cita . '</td>
                     ';
                     
-        $tabla .= '
+       if ($tipo == 1){
+           $tabla .= '
                     <td>
+                      
                         <button class="btn btn-sm btn-primary"><i class="fas fa-file-prescription"></i></button>
+                        
                         <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
                         <button class="btn btn-sm btn-danger"><i class="fas fa-eraser"></i></button>
                     </td>
                 </tr>
             </tbody>
         ';
+       }else{
+           $tabla .= '
+                    <td>
+
+                        <button class="btn btn-sm btn-primary"><i class="fas fa-file-prescription"></i></button>
+         
+                    </td>
+                </tr>
+            </tbody>
+        ';
+       }
         
     }
 }
@@ -146,7 +168,7 @@ else {
     $tabla .= '
         <tbody>
             <tr>
-                <td colspan="4">No se encontraron resultados</td>
+                <td colspan="6">No se encontraron resultados</td>
             </tr>
         </tbody>
     ';

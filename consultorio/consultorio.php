@@ -12,7 +12,7 @@ Consultorios
 
 <!-- Contenido de la pagina -->
 <div class="container-fluid ">
-    <h1 id="tituloprueb" class="mt-4 text-center">Consultorio</h1>
+    <h1 id="tituloprueb" class="mt-4 text-center">Consultorios</h1>
     <br>
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">

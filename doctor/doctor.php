@@ -1,5 +1,7 @@
 <!-- Se incluye la plantilla base -->
-<?php include('../templates/prub.php'); ?>
+<?php include('../templates/prub.php');
+
+$tipo = $_SESSION["tipo"];?>
 
 
 <!-- Se le da el valor al bloque de titulo -->
@@ -20,13 +22,19 @@ Doctor
     <div class="container-sm">
         <div class="row justify-content-between align-items-center">
 
-            <!-- Boton de nuevo registro-->
+            <?php
+            if($tipo == 1){
+                echo '
+                 <!-- Boton de nuevo registro-->
             <div class="col-4">
                 <button type="button" id="nuevo" class="btn btn-dark" data-bs-toggle="modal"
                         data-bs-target="#nuevoModal">
                     Nuevo
                 </button>
             </div>
+                ';
+            }
+            ?>
 
             <!-- Campo de busqueda -->
             <div class="col-4">

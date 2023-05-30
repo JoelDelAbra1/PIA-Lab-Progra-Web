@@ -2,11 +2,21 @@
 // Se incluye la conexion a la DB
 include("../conexion/conexion.php");
 
+session_start();
+$tipo =  $_SESSION["tipo"];
+$id_usr = $_SESSION["id_usr"];
+$nombre = $_SESSION["nombre"];
+
 // Se guardan las columnas en un array para ser usadas despues
 $columns = ['id_usr', 'nom_usr', 'email_usr', 'tel_usr'];
 
 // Se guarda el nombre de la tabla
-$entidad = "users";
+if ($tipo != 1){
+    $entidad = "v_user";
+} else{
+    $entidad = "users";
+}
+
 
 // Se guarda el id
 $id = 'id_usr';
@@ -15,10 +25,10 @@ $id = 'id_usr';
 $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_POST['searchSend']) : null;
 
 // Varaiable que nos ayudara a la busqueda
-$where = "";
 
+$id_usr = $_SESSION['id_usr'];
 // Se comprueba si se esta realizando una bisqueda
-if ($search != null) {
+if ($search != null || $tipo != 1) {
 
     //Si es verdad se empieza a crear una consulta con los valores
     $where = "WHERE (";
@@ -34,7 +44,17 @@ if ($search != null) {
     // Se termina la consulta y se quita el OR
     $where = substr_replace($where, "", -3);
     $where .= ")";
-}
+    if ($tipo == 2){
+        $where .= " AND id_doc = $id_usr";
+    }
+    if ($tipo == 3){
+        $where .= " AND id_usr = $id_usr";
+    }
+
+
+}else
+    $where ="";
+
 
 
 //
@@ -76,12 +96,11 @@ if (isset($_POST['displaySend'])) {
             </tr>  
     ';
 
-
     $sql = "SELECT SQL_CALC_FOUND_ROWS " . implode(", ", $columns) . " FROM $entidad
     $where
     $sLimit";
 
-
+echo $sql;
 
     $result = mysqli_query($conexion, $sql);
 
@@ -122,18 +141,26 @@ if (isset($_POST['displaySend'])) {
                             <td>' . $email_usr . '</td>
                             <td>' . $tel_usr . '</td>
                             <td>
-<button class="btn btn-sm btn-primary"><i class="fas fa-calendar-plus"></i></button>
+             
+        ';
+        if ($tipo == 2){
+            $tabla .= '
+        <button class="btn btn-sm btn-primary"><i class="fas fa-calendar-plus"></i></button>
+<button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
+                            </td>
+                        </tr>
+        ';
+        }else{
+            $tabla .= '
+        <button class="btn btn-sm btn-primary"><i class="fas fa-calendar-plus"></i></button>
 <button class="btn btn-sm btn-success"><i class="fas fa-eye"></i></button>
 <button class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></button>
 <button  class="btn btn-sm btn-danger" ><i class="fas fa-eraser"></i></button>
 
                             </td>
                         </tr>
-
-                       
-
-                    
         ';
+        }
     }
 }
 else {

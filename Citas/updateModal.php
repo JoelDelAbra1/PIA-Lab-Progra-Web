@@ -76,10 +76,9 @@
                                 <label for="horaCita">Hora:</label>
                                 <select id="horaCita"  class="form-control border border-secondary"></select>
                             </div>
-
-                            
+                                 <div <?php if ($tipo ==3){echo 'hidden';}?>>
 <!-- Selecionar usuario-->
-<label for="estado">Estado</label>
+<label for="estado" >Estado</label>
                             <select class="form-select border border-secondary form-control form-outline" id="estado">
                                 <!-- Se consiguen los usurarios que existen-->
                                 <?php
@@ -98,6 +97,7 @@
                                 }
                                 ?>
                             </select>
+                                 </div>
                         </div>
                             </div>
                         <div class="modal-footer">

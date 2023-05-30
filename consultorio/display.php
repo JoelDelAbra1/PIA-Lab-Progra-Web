@@ -1,6 +1,8 @@
 <?php
 // Se incluye la conexion a la DB
 include("../conexion/conexion.php");
+session_start();
+
 
 // Se guardan las columnas en un array para ser usadas despues
 $columns = ['id_cons','num_cons', 'ubi_cons'];
@@ -72,9 +74,9 @@ if (isset($_POST['displaySend'])) {
               <th>Numero de consultorio</th>
               <th>Ubicacion</th>
               
-              <th>Acciones</th>
-            </tr>  
+              
     ';
+
 
 
     $sql = "SELECT SQL_CALC_FOUND_ROWS " . implode(", ", $columns) . " FROM $entidad

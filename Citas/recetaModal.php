@@ -1,11 +1,15 @@
-<!-- Modal de las cias-->
+<!-- Modal de las recetas-->
 
 <div tabindex="0">
     <div class="modal fade" id="recetaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><?php
+                        $tipo = $_SESSION["tipo"];
+                        $titulo = $tipo == 3 ?  'Ver cita' : 'Nueva receta';
+                        echo $titulo;
+                        ?>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -68,7 +72,7 @@
                                     readonly />
                             </div>
 
-                            <h3 class="text-center">Cuerpo de la receta</h3>
+                            <h3 class="text-center" <?php if ($tipo ==3){echo 'hidden';}?>>Cuerpo de la receta</h3>
 
                             
                             <div id="divOriginal" hidden>
@@ -94,7 +98,7 @@
                             <input type="text" class="form-control border border-secondary frecuencia" />
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-sm duplicate-btn">Duplicar</button> <!-- Botón de duplicar -->
+                    <button class="btn btn-primary btn-sm duplicate-btn" <?php if ($tipo == 3){echo 'hidden';}?>>Duplicar</button> <!-- Botón de duplicar -->
 
 <div>
                     <div id="divOriginalTest" hidden>
@@ -119,10 +123,10 @@
                     
 </div>
 
-                    <button class="btn btn-primary btn-sm duplicateTest-btn">Duplicar test</button> <!-- Botón de duplicar -->
+                    <button class="btn btn-primary btn-sm duplicateTest-btn" <?php if ($tipo ==3){echo 'hidden';}?>>Duplicar test</button> <!-- Botón de duplicar -->
 
 
-                    <button class="btn btn-success btn-sm save-btn">Guardar</button> <!-- Botón de guardar -->
+                    <button class="btn btn-success btn-sm save-btn" <?php if ($tipo ==3){echo 'hidden';}?>>Guardar</button> <!-- Botón de guardar -->
 
 
 
@@ -131,7 +135,7 @@
                             <div class="modal-footer">
                                 <button type="button" id="closeNew" class="btn btn-danger"
                                     data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-dark">Guardar</button>
+                                <button type="submit" class="btn btn-dark" <?php if ($tipo ==3){echo 'hidden';}?>>Guardar</button>
                             </div>
                         </form>
                     </div>
