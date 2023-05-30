@@ -1,0 +1,75 @@
+
+
+*{
+    font-family: 'Varela Round', sans-serif;
+    color: white;
+}
+.tarjeta{
+    background-color: #e767f0;
+}
+.principal{
+    font-size: 100px;
+}
+body{
+    background-color: #6aecfd;
+}
+
+.links{
+    color: white;
+}
+
+.barra{
+    background-color: #61e002;
+
+}
+
+.activo{
+    color: white;
+    text-decoration:underline;
+
+}
+
+.enlace{
+    color: #61e002
+}
+
+.negro{
+    color: black;
+}
+
+.texto_justy{
+    text-align: justify;
+}
+
+.txt-alado{
+    align-items: center;
+}
+
+.menu{
+    margin: 20px;
+}
+.boton{
+    padding: 10px;
+    background-color: #61e002;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+.titulo-menu-nosotros{
+    font-weight: bold;
+}
+.texto-menu{
+    font-weight: bold;
+}
+.boton-menu{
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #235390;
+}
+.text-blue{
+    color: #235390;
+}
+

@@ -4,6 +4,7 @@ include("../conexion/conexion.php");
 
 session_start();
 $tipo = $_SESSION["tipo"];
+$id_usr = $_SESSION["id_usr"];
 
 // Se guardan las columnas en un array para ser usadas despues
 $columns = ['id_doc','nombre_doc', 'nom_esp', 'num_cons'];
@@ -21,7 +22,7 @@ $search = isset($_POST['searchSend']) ? mysqli_real_escape_string($conexion, $_P
 $where = "";
 
 // Se comprueba si se esta realizando una bisqueda
-if ($search != null) {
+if ($search != null || $tipo == 2) {
 
     //Si es verdad se empieza a crear una consulta con los valores
     $where = "WHERE (";
@@ -37,6 +38,10 @@ if ($search != null) {
     // Se termina la consulta y se quita el OR
     $where = substr_replace($where, "", -3);
     $where .= ")";
+    if ($tipo == 2){
+        $where .= " AND id_doc = $id_usr";
+    }
+
 }
 
 
@@ -84,6 +89,7 @@ if (isset($_POST['displaySend'])) {
     $where
     $sLimit";
 
+    echo $sql;
 
 
     $result = mysqli_query($conexion, $sql);

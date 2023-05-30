@@ -1,5 +1,6 @@
 <!-- Se incluye la plantilla base -->
-<?php include('../templates/prub.php');?>
+<?php include('../templates/prub.php');
+$tipo = $_SESSION["tipo"];?>
 
 <!-- Se le da el valor al bloque de titulo -->
 <?php startblock('title') ?>
@@ -16,13 +17,20 @@ Usuarios
   <br>
   <div class="container-sm">
     <div class="row justify-content-between align-items-center">
-
-      <!-- Boton de nuevo registro-->
+      <?php
+      $div ="";
+      if ($tipo == 3){
+        $div = '<!-- Boton de nuevo registro-->
       <div class="col-4">
-        <button type="button" id="nuevo" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#nuevoModal">
+        <button type="button" id="nuevo" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#nuevoModal" >
           Nuevo
         </button>
-      </div>
+      </div>';
+
+      }
+      echo $div;
+      ?>
+
 
       <!-- Campo de busqueda -->
       <div class="col-4">
